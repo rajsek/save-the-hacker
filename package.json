@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "React redux boilerplate template created for save the hacker hackathon event",
   "main": "index.js",
-  "author": "rajasekar.durairaj@krds.fr",
+  "author": "rajisekar.d@gmail.com",
   "license": "MIT",
   "devDependencies": {
     "array-from": "^2.1.1",
