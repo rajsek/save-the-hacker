@@ -15,19 +15,4 @@ const conf = {
     }
 };
 
-switch (app_env) {
-    case 'development':
-        conf.sample = 'xxxx';
-        break;
-    case 'staging':
-        conf.sample = 'xxxx';
-        break;
-    case 'production':
-        conf.sample = 'xxxx';
-        break;
-    case 'local':
-    default:
-        conf.sample = 'xxxx';
-}
-
 module.exports = conf;

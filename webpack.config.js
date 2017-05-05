@@ -115,7 +115,7 @@ const getEntryFiles = function() {
     entry.lib = [
         'react', 'react-router', 'react-dom', 'redux-thunk', 'redux',
         'react-redux', 'lodash.curryright', 'react-router-redux', 'react-intl',
-        'immutable', 'redux-immutable', 'react-html5video',
+        'immutable', 'redux-immutable',
         'cookie-jeep', 'es6-promise/auto', 'es6-object-assign/auto', 'array-from'
     ];
     //add HMR points here

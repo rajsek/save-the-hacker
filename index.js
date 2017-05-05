@@ -11,10 +11,6 @@ var logger = require('./logger');
 var cors = require('cors');
 var i18n = require('i18n');
 var url = require('url');
-var models = require('./models');
-var requestIp = require('request-ip');
-var maxmind = require('maxmind');
-var countryLookup = maxmind.openSync('./data/GeoLite2-Country.mmdb');
 
 require('dotenv').config({ path: __dirname + '/.env' });
 
@@ -64,7 +60,7 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
 app.use(session({
-    secret: 'ooredoo#',
+    secret: 'saveTheHacker#',
     path: '/api',
     resave: true,
     saveUninitialized: true,
@@ -90,8 +86,8 @@ if (process.env.APP_ENV === 'local' && process.env.NODE_ENV === 'production') {
     logger.log('info', 'Running local build server');
 }
 
-app.use('/assets/media', express.static(path.resolve(__dirname, 'public/assets/media')));
 app.use('/assets/img', express.static(path.resolve(__dirname, 'public/assets/img')));
+app.use('/assets/data', express.static(path.resolve(__dirname, 'public/assets/data')));
 
 if (isLocalDev) { //webpack for local development
     const
@@ -129,17 +125,10 @@ if (isLocalDev) { //webpack for local development
     app.use(express.static(BUILD_DIR));
 
     app.get('*', (req, res, next) => {
-        var location = countryLookup.get(requestIp.getClientIp(req));
         app.set('views', __dirname + '/public/build');
 
         var host = req.headers.host;
         var context = {};
-        context.defaultLocale = 'en_US';
-        context.isShowLangSwitch = true;
-
-        context.package_country = (location != null && config.countries.indexOf(location.country.iso_code) > -1)
-            ? location.country.iso_code
-            : config.default_country;
 
         context.app_env = process.env.APP_ENV;
 
