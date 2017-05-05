@@ -1,0 +1,2 @@
+export const SAMPLE_ACTION = 'SAMPLE_ACTION';
+export const LOCALE_CHANGE= 'LOCALE_CHANGE'

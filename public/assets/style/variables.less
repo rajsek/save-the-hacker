@@ -1,0 +1,24 @@
+/* Paths */
+@fontPath: '../font';
+@imgPath: '../img';
+
+/* Colors */
+@themeBlack: #221e20;
+@ooredooRed: #ed1c24;
+
+/* Global Media Queries */
+@maxMobilePortrait: ~'440px';
+@fromMaxMobilePortrait:  ~'only screen and (min-width: 440px)';
+@fromMidPoint: ~'only screen and (min-width: 860px)';
+@fromDesktopEntry: ~'only screen and (min-width: 1080px)';
+@fromGlobalLaptop: ~'only screen and (min-width: 1320px)';
+@fromGlobalDesktop: ~'only screen and (min-width: 1560px)';
+@fromBigScreen: ~'only screen and (min-width: 1760px)';
+
+/* Direction */
+@ltrPlus: ~'';
+@ltrMinus: ~'-';
+html[dir=rtl] {
+	@ltrPlus: ~'-';
+	@ltrMinus: ~'';
+}
