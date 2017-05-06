@@ -23,6 +23,104 @@
     font-style: normal;
 }
 
+.map {
+	width: 1000px;
+    height: 500px;
+}
+
+.map > div:first-child {
+    width: 1000px;
+    height: 500px;
+    position: relative;
+}
+#map_last {
+position: relative !important;
+	z-index: 2;
+	overflow: hidden;
+
+	bottom: 0;
+	left: 0;
+
+	width: 140px;
+	height: 140px;
+
+	border-radius: 1000px;
+
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	cursor: pointer;
+
+	transition: all 0.4s;
+
+	&.hover {
+		width: 300px;
+		height: 300px;
+	}
+
+	& * {
+		pointer-events: none;
+	}
+
+	& > div {
+		z-index: 1;
+		position: absolute;
+
+		left: 50%;
+		top: 50%;
+
+		width: 800px;
+		height: 600px;
+
+		margin: -300px 0 0 -400px;
+	}
+
+	& > span {
+		z-index: 1;
+		display: block;
+		position: absolute;
+
+		left: 50%;
+		top: 50%;
+
+		width: 150px;
+		max-width: 50%;
+
+		height: 100%;
+
+		-webkit-transform-origin: left top;
+			-moz-transform-origin: left top;
+			-ms-transform-origin: left top;
+				transform-origin: left top;
+
+		&.inside > span {
+			display: none; //huhuhu
+			left: 100%;
+			bottom: 100%;
+
+			background-position: left top;
+		}
+
+		&.outside > span {
+			right: 0;
+
+			background-position: right center;
+			transform : translate(0, -50%) !important;
+		}
+
+		& > span {
+			position: absolute;
+			display: block;
+
+			width: 25px;
+			height: 36px;
+
+			background-image: url('@{imgPath}/img_arrow.png');
+			background-repeat: no-repeat;
+
+			transform : translate(0, -50%) !important;
+			transform-origin: left bottom;
+		}
+	}
+}
 /* Reset */
 html, body {
     height: 100%;
