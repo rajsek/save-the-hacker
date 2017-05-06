@@ -48,7 +48,6 @@
     "redux-form": "^6.6.3",
     "redux-immutable": "3.0.8",
     "redux-thunk": "2.1.0",
-    "request-ip": "^2.0.1",
     "slugify": "^1.1.0",
     "style-loader": "^0.16.1",
     "three-trackballcontrols": "^0.0.5",
@@ -72,7 +71,8 @@
     "request": "^2.81.0",
     "three": "^0.85.2",
     "url": "^0.11.0",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "request-ip": "^2.0.1"
   },
   "engines": {
     "node": "6.10.2",
