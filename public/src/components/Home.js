@@ -54,7 +54,7 @@ class Home extends Component {
 
         var app_id = fbAppId == "{{fbAppId}}" ? '124414508110637' : fbAppId;
         //Facebook JS
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
                 appId: app_id,
                 cookie: true,  // enable cookies to allow the server to access the session
@@ -62,20 +62,20 @@ class Home extends Component {
                 version: 'v2.8' // use version 2.1
             });
 
-            FB.getLoginStatus(function(response) {
+            FB.getLoginStatus(function (response) {
                 this.statusChangeCallback(response);
             }.bind(this));
         }.bind(this);
 
         //Get Login State if Facebook already loaded
-        if(typeof FB != 'undefined') {
-            FB.getLoginStatus(function(response) {
+        if (typeof FB != 'undefined') {
+            FB.getLoginStatus(function (response) {
                 this.statusChangeCallback(response);
             }.bind(this));
         }
 
         // Load the SDK asynchronously
-        (function(d, s, id) {
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
             js = d.createElement(s); js.id = id;
@@ -220,27 +220,27 @@ class Home extends Component {
 
         function intro(_this) {
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'waveIn-1 loaded'
                 });
             }, 1800);
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'waveIn-2 loaded',
                     welcomeText: 'Choose a challange to play'
                 });
             }, 3600);
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'waveIn-3 loaded',
                     welcomeText: 'Play it ! Complete all the challanges !!'
                 });
             }, 5400);
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'globeReady loaded',
                     welcomeText: ''
@@ -252,10 +252,10 @@ class Home extends Component {
     }
 
     statusChangeCallback(response) {
-        if(response.status == 'not_authorized' && document.getElementById('social_connect') != null) {
+        if (response.status == 'not_authorized' && document.getElementById('social_connect') != null) {
             document.getElementById('social_connect').style.display = 'block';
         }
-        else if(response.status === 'connected' && document.getElementById('social_connect') != null) {
+        else if (response.status === 'connected' && document.getElementById('social_connect') != null) {
             document.getElementById('social_connect').style.display = 'none';
 
             FB.api('/me?fields=id,name,first_name,last_name,', (response) => {
@@ -265,7 +265,7 @@ class Home extends Component {
     }
 
     checkLoginState() {
-        FB.getLoginStatus(function(response) {
+        FB.getLoginStatus(function (response) {
             this.statusChangeCallback(response);
         }.bind(this));
     }
@@ -273,7 +273,7 @@ class Home extends Component {
     handleFbClick(e) {
         e.preventDefault();
 
-        FB.login(this.checkLoginState.bind(this), {scope: 'public_profile'});
+        FB.login(this.checkLoginState.bind(this), { scope: 'public_profile' });
     }
 
     render() {
