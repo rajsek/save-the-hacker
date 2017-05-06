@@ -234,7 +234,7 @@ class FindOnMap extends Component {
                             .Failed();
                     }
                 }}>
->>>>>>> local_map
+
                     <Circle
                         radius={5000}
                         fillColor='transparent'
@@ -244,14 +244,7 @@ class FindOnMap extends Component {
                             lng: this.props.mapData.lng
                         }}
                         onClick={(position) => {
-<<<<<<< HEAD
-                            if (this.props.mapData.clicked > 0) {
-                                this
-                                    .props
-                                    .Selected();
-                            }
-                        }}></Circle>
-=======
+
                         if (this.props.mapData.clicked > 0) {
                             this.props.addNewMarker(position.latLng);
                             this
@@ -269,7 +262,7 @@ class FindOnMap extends Component {
 
                         }}>
                     </Marker>)}
->>>>>>> local_map
+
                 </Map>
                 <span>{this.props.mapData.question}
                     ?

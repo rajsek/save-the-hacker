@@ -237,11 +237,7 @@ class Maps extends Component {
                         <InfoWindow
                             open={val.get('show')}
                             onCloseClick={() => {
-<<<<<<< HEAD
-                                this.showInfoWIndow(val.get('id'));
-                            }}>
-                            <div>HI {val.get('name')}</div>
-=======
+
                             this.showInfoWIndow(val.get('id'));
                         }}>
                             <div onClick={() => {
@@ -255,7 +251,7 @@ class Maps extends Component {
                                     }
 
                                 }}>HI {val.get('name')}</div>
->>>>>>> local_map
+
                         </InfoWindow>
                     </Marker>)}
                 </Map>
