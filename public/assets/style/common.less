@@ -32,9 +32,94 @@
     position: relative;
 }
 
+/* Reset */
+html, body {
+    height: 100%;
+    overflow: visible;
+}
 body {
 	background: url('@{imgPath}/bg-page.jpg') no-repeat;
 	font-family: 'exo', sans-serif;
 	font-size: 16px;
 	line-height: 1.3;
+}
+h1, h2, h3, h4, h5, h6, figure {
+    margin-top: 0;
+    margin-bottom: 0.8em;
+}
+h1, h2, h3, h4, h5, h6, b, strong {
+	font-weight: 700;
+}
+figure {
+    margin: 0;
+}
+p {
+    margin: 0 0 0.8em;
+}
+div, header, footer, section, nav {
+    box-sizing: border-box;
+}
+.mainContainer {
+    height: 100%;
+}
+
+/* Page */
+.page {
+    position: relative;
+    height: 100%;
+}
+
+/* Header */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.appLogo {
+    background-image: url('@{imgPath}/logo-etw-white.png');
+    background-position: 0 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: none;
+    position: absolute;
+    text-indent: -999em;
+    top: 1em;
+    left: 1em;
+    height: 11em;
+    width: 10em;
+    .globeReady & {
+        display: block;
+    }
+}
+.gameStatus {
+    position: absolute;
+    top: 2em;
+    right: 1.7em;
+    color: #fff;
+    font-size: 0.9em;
+    small {
+        display: inline-block;
+        font-weight: 200;
+        width: 8em;
+        font-size: 1em;
+        letter-spacing: 0.1em;
+        text-align: right;
+        margin-right: 0.5em;
+        vertical-align: top;
+        position: relative;
+        top: 1em;
+    }
+    strong {
+        background-image: url('@{imgPath}/map/icon-total.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        color: #000;
+        display: inline-block;
+        font-size: 1.2em;
+        line-height: 3.9em;
+        text-align: center;
+        width: 3.5em;
+        height: 4em;
+    }
 }

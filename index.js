@@ -11,10 +11,13 @@ var logger = require('./logger');
 var cors = require('cors');
 var i18n = require('i18n');
 var url = require('url');
+var mongoose = require("mongoose");
 
 require('dotenv').config({
     path: __dirname + '/.env'
 });
+
+mongoose.connect(process.env.MONGODB_URI);
 
 var isLocalDev = (process.env.APP_ENV === 'local' && process.env.NODE_ENV === 'local');
 var port = process.env.PORT || 9000;
@@ -150,8 +153,8 @@ if (isLocalDev) { //webpack for local development
 logger.log('debug', 'Getting server port and ip address information');
 
 app.listen(port, (error) => {
-    if (error) 
+    if (error)
         logger.log('error', error);
-    
+
     logger.log('info', 'Starting express server with port ' + port);
 })

@@ -33,12 +33,9 @@ function newErrResponse(errCode, locale) {
 }
 
 
-router.post('/helloWorld', function (req, res) {
-    var locale = default_locale;
+router.post('/saveUser', function (req, res) {
+    var Users = require('../models/users.js');
 
-    if (req.body.locale !== undefined && locales.indexOf(req.body.locale) > -1) {
-        locale = req.body.locale;
-    }
     return res.end(JSON.stringify({
         success: true
     }));
