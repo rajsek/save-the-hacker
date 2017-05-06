@@ -33,6 +33,8 @@ class Maps extends Component {
             .getStreetViewPlace(this.props.params.id);
             console.log(this.props.streetData);
 
+        console.log(this.props);
+
     }
     componentWillReceiveProps(nexProps) {
 
@@ -90,18 +92,28 @@ class Maps extends Component {
                             streetViewPanoramaOptions={streetViewPanoramaOptions}
                             onPovChanged={pov => this.props.loadPov(pov)}/>
                     </div>
-                    <div>
-                        {this.props.streetData.title}
-                        <span onClick={
+                    <div className="challangeInfo ciCamera">
+                        <figure></figure>
+                        <h3><span>Take a picture at Taj Mahal</span></h3>
+                    </div>
+                    <div className="gameProgress">
+                        <button className="btnCapture disabled" onClick={
                                     () => {
                                         this.checkPlaceisRight();
                                     }
-                        }> Click Here</span>
+                        }><i className="iconCamera"></i> <span>Click Here</span></button>
                     </div>
                     {(this.props.streetData.win) ? <div>You won</div>
                         : ((this.props.streetData.load) ? <div>Try Again</div> : <div></div>)}
                 </div>
                 <Header />
+                <div className="infoBlock">
+                    <button title="Info"></button>
+                    <div className="infoBox">
+                        <a className="close">&times;</a>
+                        <p>Surf around map and reach the mentioned destination. Once you reached the capture button will be enabled. Then take picture !!</p>
+                    </div>
+                </div>
             </div>
         );
     }

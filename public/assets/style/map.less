@@ -90,6 +90,7 @@
 	display: none;
 }
 
+/* Map popin */
 .selectChallange {
     animation: popin 300ms ease-in;
     border-radius: 20px 0 20px;
@@ -146,5 +147,168 @@
         text-align: center;
         line-height: 19px;
         text-indent: 1px;
+    }
+}
+
+/* Info in header */
+.challangeInfo {
+    background: #fff;
+    border-radius: 18px;
+    position: absolute;
+    left: 50%;
+    top: 1.4em;
+    width: 24em;
+    height: 3em;
+    display: block;
+    margin-left: -12em;
+    z-index: 11;
+    figure {
+        background: #fb4d2f;
+        border-radius: 18px 0 18px;
+        border: 1px solid rgba(0,0,0,0.35);
+        border-right-width: 3px;
+        border-bottom-width: 3px;
+        box-shadow: 3px 3px 0 rgba(0,0,0,0.25);
+        margin: 0;
+        height: 3.6em;
+        width: 3.6em;
+        position: absolute;
+        margin-top: -0.4em;
+        &:before {
+            background-image: url('@{imgPath}/map/icon-camera.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            content: '';
+            display: block;
+            width: 1.8em;
+            height: 1.8em;
+            margin: .9em auto;
+            .icTime & {
+                background-image: url('@{imgPath}/map/icon-time.png');
+            }
+            .icLocate & {
+                background-image: url('@{imgPath}/map/icon-locate.png');
+            }
+        }
+    }
+    h3 {
+        padding: 0 1em 0 4.8em;
+        height: 100%;
+        margin: 0;
+        font-size: 1em;
+        font-weight: normal;
+        line-height: 1.2;
+        letter-spacing: 0.05em;
+        &:before {
+            content: "";
+            display: inline-block;
+            min-height: 104%;
+            vertical-align: middle;
+            width: 0;
+        }
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
+
+/* Progress in bottom */
+.gameProgress {
+    position: absolute;
+    left: 50%;
+    bottom: 1.4em;
+    width: 24em;
+    display: block;
+    margin-left: -12em;
+    text-align: center;
+    z-index: 11;
+    button {
+        background: #fb4d2f;
+        border-radius: 18px 0 18px;
+        border: 1px solid rgba(0,0,0,.35);
+        border-right-width: 3px;
+        border-bottom-width: 3px;
+        box-shadow: 3px 3px 0 rgba(0,0,0,.25);
+        color: #fff;
+        margin: 0;
+        display: inline-block;
+        font-family: 'exo';
+        font-size: 1.3em;
+        padding: 0.5em 1.4em 0.4em;
+        i {
+            background-image: url('@{imgPath}/map/icon-camera.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            content: '';
+            display: inline-block;
+            width: 1.8em;
+            height: 1.8em;
+            vertical-align: middle;
+            &.iconTime {
+                background-image: url('@{imgPath}/map/icon-time.png');
+            }
+            &.iconLocate {
+                background-image: url('@{imgPath}/map/icon-locate.png');
+            }
+        }
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0.3em;
+        }
+        &.disabled {
+            background: #d6ada6;
+            cursor: default;
+            opacity: 0.4;
+        }
+    }
+}
+
+/* Info at bottom */
+.infoBlock {
+    position: absolute;
+    left: 2em;
+    bottom: 2em;
+    z-index: 11;
+    button {
+        background-image: url('@{imgPath}/map/icon-help.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: 0 none;
+        display: block;
+        width: 3.4em;
+        height: 3.4em;
+        cursor: pointer;
+    }
+}
+.infoBox {
+    display: none;
+    position: absolute;
+    bottom: 3.2em;
+    left: 3em;
+    width: 20em;
+    background: #fff;
+    padding: 16px;
+    border-radius: 16px 0 16px;
+    box-shadow: 6px 6px 0 #e4be2b;
+    p {
+        margin: 0 20px 0 0;
+    }
+    .close {
+        background: #000;
+        color: #fff;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        display: block;
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        text-align: center;
     }
 }
