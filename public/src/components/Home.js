@@ -192,35 +192,28 @@ class Home extends Component {
                 _this.setState({
                     pageProgress: 'waveIn-1 loaded'
                 });
-            }, 2000);
+            }, 1800);
 
             setTimeout(()=>{
                 _this.setState({
                     pageProgress: 'waveIn-2 loaded',
                     welcomeText: 'Choose a challange to play'
                 });
-            }, 6000);
+            }, 3600);
 
             setTimeout(()=>{
                 _this.setState({
                     pageProgress: 'waveIn-3 loaded',
                     welcomeText: 'Play it ! Complete all the challanges !!'
                 });
-            }, 10000);
-
-            setTimeout(()=>{
-                _this.setState({
-                    pageProgress: 'waveIn-4 loaded',
-                    welcomeText: "Let's Go!!"
-                });
-            }, 14000);
+            }, 5400);
 
             setTimeout(()=>{
                 _this.setState({
                     pageProgress: 'globeReady loaded',
                     welcomeText: ''
                 });
-            }, 16000);
+            }, 7200);
         }
         intro(this);
 
