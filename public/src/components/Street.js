@@ -21,15 +21,15 @@ import {defineMessages, FormattedMessage, FormattedDate, injectIntl, intlShape} 
 require('../../assets/style/main.less')
 
 class Maps extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.time = '';
     }
     componentWillMount() {}
     componentDidMount() {
         this
             .props
-            .getStreetViewData();
+            .getStreetViewData(this.props.params.id);
         this.time = window.setInterval(() => {
             this
                 .props
@@ -93,6 +93,7 @@ class Maps extends Component {
                         this.getDistanceFromLatLonInKm(position.lat(), position.lng(), this.props.streetData.latitude, this.props.streetData.longitude)
                     }}
                         apiKey={googleMapsApiKey}
+                        onLocationChanged={data => console.log(data)}
                         streetViewPanoramaOptions={streetViewPanoramaOptions}
                         onPovChanged={pov => console.log(pov)}/>
                 </div>

@@ -30,14 +30,15 @@ const labels = defineMessages({
 });
 
 class FindOnMap extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     }
     componentWillMount() {}
     componentDidMount() {
+        console.log(this.props.params.id);
         this
             .props
-            .LoadQuestion();
+            .LoadQuestion(this.props.params.id);
     }
     showInfoWIndow(id) {
         this
@@ -47,6 +48,142 @@ class FindOnMap extends Component {
     render() {
         const {formatMessage} = this.props.intl;
         console.log(this.props.mapData);
+        var styles = {style:        [
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#a2daf2"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape.man_made",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#f7f1df"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape.natural",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#d0e3b4"
+                    }
+                ]
+            },
+            {
+                "featureType": "landscape.natural.terrain",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#bde6ab"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.medical",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#fbd3da"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.business",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#ffe15f"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
+                "stylers": [
+                    {
+                        "color": "#efd151"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#ffffff"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "black"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit.station.airport",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#cfb2db"
+                    }
+                ]
+            }
+        ]};
         return (
             <div className="map">
                 <Map
@@ -54,9 +191,13 @@ class FindOnMap extends Component {
                     onMount={(map, maps) => {
                     this.map = map;
                 }}
+                    center={{
+                            lat:this.props.mapData.start.lat,
+                            lng:this.props.mapData.start.lng
+                        }}
+                    zoom={this.props.mapData.zoom}
                     optionsConstructor={function (maps) {
                     Object.assign(this, {
-                        zoom: 4,
                         mapTypeId: maps.MapTypeId.ROADMAP,
                         disableDefaultUI: true,
                         zoomControl: true,
@@ -76,11 +217,19 @@ class FindOnMap extends Component {
                         fullscreenControlOptions: {
                             position: maps.ControlPosition.RIGHT_BOTTOM
                         },
+                        scrollwheel: false,
+                        draggable:true,
+                        streetViewControl: false,
+                        panControl: false,
+                        disableDoubleClickZoom: true,
+                        styles: styles,
                         fullscreenControl: true
                     });
                 }}
                     onClick={(position) => {
                     if (this.props.mapData.clicked > 0) {
+                        console.log(position);
+                        this.props.addNewMarker(position.latLng);
                         this
                             .props
                             .Failed();
@@ -96,11 +245,22 @@ class FindOnMap extends Component {
                     }}
                         onClick={(position) => {
                         if (this.props.mapData.clicked > 0) {
+                            this.props.addNewMarker(position.latLng);
                             this
                                 .props
                                 .Selected();
                         }
                     }}></Circle>
+                        {this.props.mapData.markers.map((val) => <Marker
+                            coords={{
+                            lat: val.lat,
+                            lng: val.lng
+                        }}
+
+                        key={val.id} onClick={() => {
+
+                        }}>
+                    </Marker>)}
                 </Map>
                 <span>{this.props.mapData.question}
                     ?
