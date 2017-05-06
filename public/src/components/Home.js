@@ -211,7 +211,7 @@ class Home extends Component {
             setTimeout(()=>{
                 _this.setState({
                     pageProgress: 'waveIn-4 loaded',
-                    welcomeText: ''
+                    welcomeText: "Let's Go!!"
                 });
             }, 14000);
 
@@ -236,9 +236,10 @@ class Home extends Component {
                 <div className="travelPick"></div>
                 <div id="webgl_container" className="globeContainer"></div>
                 <div className="staticGlobe"></div>
-                <h2>{this.state.welcomeText}</h2>
                 <div className="waveBlock"><div></div><div></div></div>
                 <Header />
+                <h2>{this.state.welcomeText}</h2>
+                <div className="popin"><span>Double click a continent</span></div>
                 <div className="loadingOverlay"></div>
                 <div className="loadingLogo"><figure></figure></div>
             </div>
