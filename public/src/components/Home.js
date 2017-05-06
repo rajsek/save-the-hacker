@@ -131,7 +131,7 @@ class Home extends Component {
                                 camera.updateProjectionMatrix();
 
                                 if (zoom_val >= 4) {
-                                    browserHistory.push('/continent/' + slugify(continent.code, '_'));
+                                    browserHistory.push('/continent/' + slugify(continent.code, '_').toLowerCase());
                                     return true;
                                 }
                             });
