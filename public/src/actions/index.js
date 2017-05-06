@@ -17,6 +17,7 @@ import {
     LOAD_PANO
 } from './actionTypes';
 import markerJson from '../../../config/src/marker.json';
+import Places from '../libraries/places';
 import ContinentData from '../libraries/continent';
 import cookies from 'cookie-jeep';
 import axios from 'axios';
@@ -191,15 +192,16 @@ export const changeInfoWIndow = (id) => {
 
 export function loadMapMarkers(continent) {
     var markers = [];
-      for(var i in ContinentData)
+      for(var i in Places)
         if(i == continent) {
-            for(var val in ContinentData[i]) {
+            for(var val in Places[i]) {
+                console.log(val);
                 markers.push({
-                    lat: parseFloat(ContinentData[i][val].lat),
-                    lng: parseFloat(ContinentData[i][val].lng),
+                    lat: parseFloat(Places[i][val].lat),
+                    lng: parseFloat(Places[i][val].lng),
                     id: val,
-                    name: ContinentData[i][val].title,
-                    type:ContinentData[i][val].type,
+                    name: Places[i][val].title,
+                    type:Places[i][val].type,
                     show: false
                 });
             }

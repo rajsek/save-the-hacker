@@ -194,10 +194,10 @@ class FindOnMap extends Component {
                             lat:this.props.mapData.start.lat,
                             lng:this.props.mapData.start.lng
                         }}
+                    style={styles}
                     zoom={this.props.mapData.zoom}
                     optionsConstructor={function (maps) {
                     Object.assign(this, {
-                        mapTypeId: maps.MapTypeId.ROADMAP,
                         disableDefaultUI: true,
                         zoomControl: true,
                         zoomControlOptions: {
@@ -208,20 +208,11 @@ class FindOnMap extends Component {
                         panControlOptions: {
                             position: maps.ControlPosition.BOTTOM_RIGHT
                         },
-                        mapTypeId: maps.MapTypeId.HYBRID,
-                        mapTypeControl: true,
-                        mapTypeControlOptions: {
-                            position: maps.ControlPosition.LEFT_BOTTOM
-                        },
-                        fullscreenControlOptions: {
-                            position: maps.ControlPosition.RIGHT_BOTTOM
-                        },
                         scrollwheel: false,
                         draggable:true,
                         streetViewControl: false,
                         panControl: false,
                         disableDoubleClickZoom: true,
-                        styles: styles,
                         fullscreenControl: true
                     });
                 }}
