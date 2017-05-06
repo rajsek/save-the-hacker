@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
 import conf from '../conf';
+
 import {
     Map,
     KmlLayer,
@@ -242,11 +243,11 @@ class Maps extends Component {
                         }}>
                             <div onClick={() => {
 
-                                    if(val.get('type') == 'Map') {
+                                    if(val.get('type') == 'map') {
                                         this.props.router.push('/find-map/'+val.get('id'));
-                                    } else if(val.get('type')  == 'Time') {
+                                    } else if(val.get('type')  == 'time') {
                                         this.props.router.push('/street/'+val.get('id'));
-                                    } else if(val.get('type') == 'Picture') {
+                                    } else if(val.get('type') == 'picture') {
                                         this.props.router.push('/find-street/'+val.get('id'));
                                     }
 

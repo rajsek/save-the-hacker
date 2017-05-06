@@ -16,6 +16,7 @@ import * as topojson from 'topojson/build/topojson';
 require('../../assets/style/main.less')
 
 import d3 from 'd3';
+import Header from './Header';
 
 import {
     defineMessages,
@@ -38,6 +39,10 @@ const labels = defineMessages({
 class Home extends Component {
     constructor() {
         super();
+        this.state = {
+            welcomeText: 'Select your favorite destination',
+            pageProgress: ''
+        };
     }
 
     componentDidMount() {
@@ -180,6 +185,45 @@ class Home extends Component {
             renderer.render(scene, camera);
         }
         animate();
+
+        function intro(_this) {
+
+            setTimeout(()=>{
+                _this.setState({
+                    pageProgress: 'waveIn-1 loaded'
+                });
+            }, 2000);
+
+            setTimeout(()=>{
+                _this.setState({
+                    pageProgress: 'waveIn-2 loaded',
+                    welcomeText: 'Choose a challange to play'
+                });
+            }, 6000);
+
+            setTimeout(()=>{
+                _this.setState({
+                    pageProgress: 'waveIn-3 loaded',
+                    welcomeText: 'Play it ! Complete all the challanges !!'
+                });
+            }, 10000);
+
+            setTimeout(()=>{
+                _this.setState({
+                    pageProgress: 'waveIn-4 loaded',
+                    welcomeText: ''
+                });
+            }, 14000);
+
+            setTimeout(()=>{
+                _this.setState({
+                    pageProgress: 'globeReady loaded',
+                    welcomeText: ''
+                });
+            }, 16000);
+        }
+        intro(this);
+
     }
 
     render() {
@@ -188,8 +232,15 @@ class Home extends Component {
         const { formatMessage } = this.props.intl;
 
         return (
-            <div>
-                <div id="webgl_container"></div>
+            <div className={`page homePage ${this.state.pageProgress}`}>
+                <div className="travelPick"></div>
+                <div id="webgl_container" className="globeContainer"></div>
+                <div className="staticGlobe"></div>
+                <h2>{this.state.welcomeText}</h2>
+                <div className="waveBlock"><div></div><div></div></div>
+                <Header />
+                <div className="loadingOverlay"></div>
+                <div className="loadingLogo"><figure></figure></div>
             </div>
         );
     }

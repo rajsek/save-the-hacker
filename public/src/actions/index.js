@@ -17,6 +17,7 @@ import {
     LOAD_PANO
 } from './actionTypes';
 import markerJson from '../../../config/src/marker.json';
+import ContinentData from '../libraries/continent';
 import cookies from 'cookie-jeep';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
@@ -190,24 +191,20 @@ export const changeInfoWIndow = (id) => {
 
 export function loadMapMarkers(continent) {
     var markers = [];
-    markerJson.map((val) => {
-        console.log(val.Continent+(val.Continent == continent.replace('_',' ')));
-        if(val.Objective != '' && val.Continent == continent.replace('_',' ')) {
-            console.log(val);
-            var latlng = JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start;
-            //console.log(val.Id)
-            //console.log(typeof(JSON.parse(JSON.stringify(eval('(' + latlng + ')')))));
-            markers.push({
-                    lat: parseFloat(latlng.lat),
-                    lng: parseFloat(latlng.lng),
-                    id: val.Id,
-                    name: val.Title,
-                    type:val.Type,
+      for(var i in ContinentData)
+        if(i == continent) {
+            for(var val in ContinentData[i]) {
+                markers.push({
+                    lat: parseFloat(ContinentData[i][val].lat),
+                    lng: parseFloat(ContinentData[i][val].lng),
+                    id: val,
+                    name: ContinentData[i][val].title,
+                    type:ContinentData[i][val].type,
                     show: false
                 });
-        }
+            }
 
-    });
+    };
     return dispatch => {
         dispatch({
             type: MAP_MARKER,
