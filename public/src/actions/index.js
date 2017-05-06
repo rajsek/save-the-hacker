@@ -122,7 +122,9 @@ export const getStreetViewPlace = (id) => {
                             pitch:{
                                 min:s.pitch.min,
                                 max:s.pitch.max
-                            }
+                            },
+                            lat:s.lat,
+                            lng:s.lng
                         })
                     };
                     dispatch({

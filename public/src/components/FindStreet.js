@@ -30,6 +30,7 @@ class Maps extends Component {
         this
             .props
             .getStreetViewPlace(this.props.params.id);
+            console.log(this.props.streetData);
 
     }
     componentWillReceiveProps(nexProps) {
@@ -68,6 +69,7 @@ class Maps extends Component {
     render() {
         const {formatMessage} = this.props.intl;
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
+        console.log(this.props.streetData);
         const streetViewPanoramaOptions = this.props.streetData.data;
         return (
             <div className="map">
@@ -85,6 +87,7 @@ class Maps extends Component {
                         onPositionChanged={position => {
                             this.props.loadPosition(position)
                     }}
+                        panos={this.props.streetData.porno}
                         onLocationChanged={data => console.log(data)}
                         apiKey={googleMapsApiKey}
                         streetViewPanoramaOptions={streetViewPanoramaOptions}
