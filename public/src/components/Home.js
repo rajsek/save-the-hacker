@@ -258,7 +258,7 @@ class Home extends Component {
         else if (response.status === 'connected' && document.getElementById('social_connect') != null) {
             document.getElementById('social_connect').style.display = 'none';
 
-            FB.api('/me?fields=id,name,first_name,last_name,', (response) => {
+            FB.api('/me?fields=id,name,first_name,last_name', (response) => {
                 this.props.saveUser(response.id, response.first_name, response.last_name);
             });
         }
@@ -292,6 +292,7 @@ class Home extends Component {
                 <div className="popin"><span>Double click a continent</span></div>
                 <div className="loadingOverlay"></div>
                 <div className="loadingLogo"><figure></figure></div>
+                <button id="social_connect" className="fbButton btn btnDefault" onClick={this.handleFbClick.bind(this)}><span>Connect</span></button>
             </div>
         );
     }
