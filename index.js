@@ -16,7 +16,9 @@ var requestIp = require('request-ip');
 var maxmind = require('maxmind');
 var countryLookup = maxmind.openSync('./data/GeoLite2-Country.mmdb');
 
-require('dotenv').config({ path: __dirname + '/.env' });
+require('dotenv').config({
+    path: __dirname + '/.env'
+});
 
 var isLocalDev = (process.env.APP_ENV === 'local' && process.env.NODE_ENV === 'local');
 var port = process.env.PORT || 9000;
@@ -24,7 +26,12 @@ var port = process.env.PORT || 9000;
 logger.log('debug', 'Starting up');
 // dotenv, must be loaded first
 logger.log('debug', 'Getting the environment');
-var environment = process.argv[2] ? process.argv[2].toLowerCase().substring(2) : 'dev';
+var environment = process.argv[2]
+    ? process
+        .argv[2]
+        .toLowerCase()
+        .substring(2)
+    : 'dev';
 
 logger.log('info', 'Loading dotenv with env = ' + process.env.APP_ENV);
 
@@ -47,7 +54,9 @@ logger.log('debug', 'Registering custom functions for Handlebars');
 var hbs = expressHbs.create({
     extname: 'hbs',
     helpers: {
-        i18n: function (text) { return i18n.__(text); }
+        i18n: function (text) {
+            return i18n.__(text);
+        }
     }
 });
 
@@ -68,13 +77,15 @@ app.use(session({
     path: '/api',
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: 600000 }
+    cookie: {
+        maxAge: 600000
+    }
 }));
 
 // misc. configuration
 app.use(morgan('dev'));
-app.use(bodyParser.json({ limit: '5mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({extended: true, limit: '5mb'}));
 app.use(cookieParser());
 app.use(cors());
 app.enable('trust proxy');
@@ -94,34 +105,33 @@ app.use('/assets/media', express.static(path.resolve(__dirname, 'public/assets/m
 app.use('/assets/img', express.static(path.resolve(__dirname, 'public/assets/img')));
 
 if (isLocalDev) { //webpack for local development
-    const
-        webpack = require('webpack'),
+    const webpack = require('webpack'),
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
         webpack_config = require('./webpack.config.js'),
         compiler = webpack(webpack_config),
         indexFile = path.resolve(webpack_config.output.path, 'index.hbs')
 
-    app.use(
-        webpackDevMiddleware(compiler, {
-            publicPath: webpack_config.output.publicPath,
-            inline: true,
-            stats: 'minimal'
-        })
-    );
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath: webpack_config.output.publicPath,
+        inline: true,
+        stats: 'minimal'
+    }));
 
     app.use(webpackHotMiddleware(compiler));
 
     app.get('*', (req, res, next) => {
-        compiler.outputFileSystem.readFile(indexFile, (error, result) => {
-            if (error) {
-                return next(error);
-            }
+        compiler
+            .outputFileSystem
+            .readFile(indexFile, (error, result) => {
+                if (error) {
+                    return next(error);
+                }
 
-            res.set('content-type', 'text/html');
-            res.send(result);
-            res.end();
-        })
+                res.set('content-type', 'text/html');
+                res.send(result);
+                res.end();
+            })
     });
 } else {
     //other envs
@@ -151,8 +161,8 @@ if (isLocalDev) { //webpack for local development
 logger.log('debug', 'Getting server port and ip address information');
 
 app.listen(port, (error) => {
-    if (error)
+    if (error) 
         logger.log('error', error);
-
+    
     logger.log('info', 'Starting express server with port ' + port);
 })
