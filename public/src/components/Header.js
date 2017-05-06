@@ -14,7 +14,7 @@ class Header extends Component {
 
         return (
             <header>
-                <h1>Logo</h1>
+                <a className="appLogo" title="Explore the world">Explore the world</a>
                 <div className="gameStatus">
                     <small>Challanges Completed</small>
                     <strong>1/15</strong>
