@@ -75,15 +75,11 @@ class Maps extends Component {
                         S
                     </div>
                     {(this.props.streetData.time > 0)
-                        ? ((this.props.streetData.distance > 10)
-                            ? ((this.props.streetData.distance > 100)
-                                ? <div>
-                                        You are more than {this.props.streetData.distance} metres away
-                                    </div>
-                                : <div>
-                                    You are more than {this.props.streetData.distance}
+                        ? ((this.props.streetData.distance > 50)
+                            ? <div>
+                                    You are {this.props.streetData.distance}
                                     metres away
-                                </div>)
+                            </div>
                             : <div>You won</div>)
                         : <div>You Lost</div>}
                     <ReactStreetview

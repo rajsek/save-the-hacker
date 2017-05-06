@@ -154,10 +154,10 @@ export const getStreetViewData = (id) => {
      markerJson.map((val) => {
         if(val.Id == id) {
             //console.log(typeof(val.Data));
-            var my_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lat);
-            var my_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lng);
-            var new_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Objective + ')'))).lat);
-            var new_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Objective + ')'))).lng);
+            var new_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lat);
+            var new_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lng);
+            var my_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Objective + ')'))).lat);
+            var my_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Objective + ')'))).lng);
             console.log(new_long);
 
                 dispatch({
@@ -168,8 +168,8 @@ export const getStreetViewData = (id) => {
                             lng: new_long
                         },
                         pov: {
-                            heading: 75,
-                            pitch: 0
+                            heading: parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.head),
+                            pitch: parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.pitch)
                         },
                         zoom: 1
                     },
@@ -217,7 +217,7 @@ export function loadMapMarkers(continent) {
     };
 };
 
-export const saveUser(id, first_name, last_name) {
+export function saveUser(id, first_name, last_name) {
     axios.post('/api/saveUser', {
         id_fb: response.id,
         first_name: response.first_name,
