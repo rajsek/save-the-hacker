@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
 import conf from '../conf';
+import Header from './Header';
 import {
     Map,
     KmlLayer,
@@ -184,86 +185,89 @@ class FindOnMap extends Component {
             }
         ]};
         return (
-            <div className="map">
-                <Map
-                    api-key='AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA'
-                    onMount={(map, maps) => {
-                    this.map = map;
-                }}
-                    center={{
-                            lat:this.props.mapData.start.lat,
-                            lng:this.props.mapData.start.lng
-                        }}
-                    style={styles}
-                    zoom={this.props.mapData.zoom}
-                    optionsConstructor={function (maps) {
-                    Object.assign(this, {
-                        disableDefaultUI: true,
-                        zoomControl: true,
-                        zoomControlOptions: {
-                            position: maps.ControlPosition.LEFT_CENTER
-                        },
-                        keyboardShortcuts: true,
-                        panControl: true,
-                        panControlOptions: {
-                            position: maps.ControlPosition.BOTTOM_RIGHT
-                        },
-                        scrollwheel: false,
-                        draggable:true,
-                        streetViewControl: false,
-                        panControl: false,
-                        disableDoubleClickZoom: true,
-                        fullscreenControl: true
-                    });
-                }}
-                    onClick={(position) => {
-                    if (this.props.mapData.clicked > 0) {
-                        console.log(position);
-                        this.props.addNewMarker(position.latLng);
-                        this
-                            .props
-                            .Failed();
-                    }
-                }}>
-
-                    <Circle
-                        radius={5000}
-                        fillColor='transparent'
-                        strokeColor='transparent'
+            <div className="page mapPage findMap">
+                <div className="map">
+                    <Map
+                        api-key='AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA'
+                        onMount={(map, maps) => {
+                        this.map = map;
+                    }}
                         center={{
-                            lat: this.props.mapData.lat,
-                            lng: this.props.mapData.lng
-                        }}
+                                lat:this.props.mapData.start.lat,
+                                lng:this.props.mapData.start.lng
+                            }}
+                        style={styles}
+                        zoom={this.props.mapData.zoom}
+                        optionsConstructor={function (maps) {
+                        Object.assign(this, {
+                            disableDefaultUI: true,
+                            zoomControl: true,
+                            zoomControlOptions: {
+                                position: maps.ControlPosition.LEFT_CENTER
+                            },
+                            keyboardShortcuts: true,
+                            panControl: true,
+                            panControlOptions: {
+                                position: maps.ControlPosition.BOTTOM_RIGHT
+                            },
+                            scrollwheel: false,
+                            draggable:true,
+                            streetViewControl: false,
+                            panControl: false,
+                            disableDoubleClickZoom: true,
+                            fullscreenControl: true
+                        });
+                    }}
                         onClick={(position) => {
-
                         if (this.props.mapData.clicked > 0) {
+                            console.log(position);
                             this.props.addNewMarker(position.latLng);
                             this
                                 .props
-                                .Selected();
+                                .Failed();
                         }
-                    }}></Circle>
-                        {this.props.mapData.markers.map((val) => <Marker
-                            coords={{
-                            lat: val.lat,
-                            lng: val.lng
-                        }}
+                    }}>
 
-                        key={val.id} onClick={() => {
+                        <Circle
+                            radius={5000}
+                            fillColor='transparent'
+                            strokeColor='transparent'
+                            center={{
+                                lat: this.props.mapData.lat,
+                                lng: this.props.mapData.lng
+                            }}
+                            onClick={(position) => {
 
-                        }}>
-                    </Marker>)}
+                            if (this.props.mapData.clicked > 0) {
+                                this.props.addNewMarker(position.latLng);
+                                this
+                                    .props
+                                    .Selected();
+                            }
+                        }}></Circle>
+                            {this.props.mapData.markers.map((val) => <Marker
+                                coords={{
+                                lat: val.lat,
+                                lng: val.lng
+                            }}
 
-                </Map>
-                <span>{this.props.mapData.question}
-                    ?
-                    <br /></span>
-                <span>{(this.props.mapData.clicked <= 0)
-                    ? 'You Lost'
-                    : ((this.props.mapData.won)
-                        ? 'You Won'
-                        : 'You have ' + this.props.mapData.clicked + 'chance to play')}
-                </span>
+                            key={val.id} onClick={() => {
+
+                            }}>
+                        </Marker>)}
+
+                    </Map>
+                    <span>{this.props.mapData.question}
+                        ?
+                        <br /></span>
+                    <span>{(this.props.mapData.clicked <= 0)
+                        ? 'You Lost'
+                        : ((this.props.mapData.won)
+                            ? 'You Won'
+                            : 'You have ' + this.props.mapData.clicked + 'chance to play')}
+                    </span>
+                </div>
+                <Header />
             </div>
         );
     }

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
 import conf from '../conf';
+import Header from './Header';
 import {
     Map,
     KmlLayer,
@@ -63,14 +64,20 @@ class Maps extends Component {
         console.log(this.props.streetData);
         const streetViewPanoramaOptions = this.props.streetData.data;
         return (
-            <div className="map">
-                <div
-                    style={{
-                    width: '800px',
-                    height: '450px',
-                    backgroundColor: '#eeeeee'
-                }}>
-                    <div>{parseInt(this.props.streetData.time / 60)}
+            <div className="page mapPage streetView">
+                <div className="map">
+                    <ReactStreetview
+                        onPositionChanged={position => {
+                        console.log(position);
+                        this.getDistanceFromLatLonInKm(position.lat(), position.lng(), this.props.streetData.latitude, this.props.streetData.longitude)
+                    }}
+                        apiKey={googleMapsApiKey}
+                        onLocationChanged={data => console.log(data)}
+                        streetViewPanoramaOptions={streetViewPanoramaOptions}
+                        onPovChanged={pov => console.log(pov)}/>
+
+                    <div>
+                    {parseInt(this.props.streetData.time / 60)}
                         M : {this.props.streetData.time % 60}
                         S
                     </div>
@@ -82,17 +89,8 @@ class Maps extends Component {
                             </div>
                             : <div>You won</div>)
                         : <div>You Lost</div>}
-                    <ReactStreetview
-                        onPositionChanged={position => {
-                        console.log(position);
-                        this.getDistanceFromLatLonInKm(position.lat(), position.lng(), this.props.streetData.latitude, this.props.streetData.longitude)
-                    }}
-                        apiKey={googleMapsApiKey}
-                        onLocationChanged={data => console.log(data)}
-                        streetViewPanoramaOptions={streetViewPanoramaOptions}
-                        onPovChanged={pov => console.log(pov)}/>
                 </div>
-
+                <Header />
             </div>
         );
     }

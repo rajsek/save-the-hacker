@@ -22,15 +22,6 @@
     font-weight: normal;
     font-style: normal;
 }
-.map {
-	width: 1000px;
-    height: 500px;
-}
-.map > div:first-child {
-    width: 1000px;
-    height: 500px;
-    position: relative;
-}
 
 /* Reset */
 html, body {
@@ -75,6 +66,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 12;
 }
 .appLogo {
     background-image: url('@{imgPath}/logo-etw-white.png');
@@ -117,7 +109,7 @@ header {
         color: #000;
         display: inline-block;
         font-size: 1.2em;
-        line-height: 3.9em;
+        line-height: 3.8em;
         text-align: center;
         width: 3.5em;
         height: 4em;
