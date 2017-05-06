@@ -93,6 +93,8 @@ class Maps extends Component {
                             onPositionChanged={position => {
                                 this.props.loadPosition(position)
                         }}
+
+                            panos={this.props.streetData.porno}
                             onLocationChanged={data => console.log(data)}
                             apiKey={googleMapsApiKey}
                             streetViewPanoramaOptions={streetViewPanoramaOptions}
