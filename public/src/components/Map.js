@@ -3,6 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
+import ContinentData from '../libraries/continent';
 import conf from '../conf';
 
 import {
@@ -52,7 +53,7 @@ class Maps extends Component {
             .props
             .mapData
             .get('markers');
-        var styles = {style:        [
+        var mapStyle = {style:        [
             {
                 "featureType": "water",
                 "elementType": "geometry",
@@ -188,6 +189,7 @@ class Maps extends Component {
                 ]
             }
         ]};
+        var configData = ContinentData[this.props.params.name];
         return (
             <div className="map">
                 <Map
@@ -195,10 +197,15 @@ class Maps extends Component {
                     onMount={(map, maps) => {
                         this.map = map;
                     }}
+                    center={{
+                        lat:parseFloat(configData.center.lat),
+                        lng:parseFloat(configData.center.lng)
+                    }}
+                    mapType="ROADMAP"
+                    style={mapStyle}
                     optionsConstructor={function (maps) {
                     Object.assign(this, {
-                        zoom: 4,
-                        mapTypeId: maps.MapTypeId.ROADMAP,
+                        zoom: parseInt(configData.zoom),
                         disableDefaultUI: true,
                         zoomControl: true,
                         zoomControlOptions: {
@@ -209,11 +216,6 @@ class Maps extends Component {
                         panControlOptions: {
                             position: maps.ControlPosition.BOTTOM_RIGHT
                         },
-                        mapTypeId: maps.MapTypeId.HYBRID,
-                        mapTypeControl: true,
-                        mapTypeControlOptions: {
-                            position: maps.ControlPosition.LEFT_BOTTOM
-                        },
                         fullscreenControlOptions: {
                             position: maps.ControlPosition.RIGHT_BOTTOM
                         },
@@ -222,7 +224,6 @@ class Maps extends Component {
                         streetViewControl: false,
                         panControl: false,
                         disableDoubleClickZoom: true,
-                        styles: styles,
                         fullscreenControl: true
                     });
                 }}>
