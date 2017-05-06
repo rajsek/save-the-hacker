@@ -13,6 +13,7 @@ import { convertToXYZ, getEventCenter, geodecoder } from '../libraries/geoHelper
 import { mapTexture } from '../libraries/mapTexture';
 import { getTween, memoize } from '../libraries/utils';
 import * as topojson from 'topojson/build/topojson';
+require('../../assets/style/main.less')
 
 import d3 from 'd3';
 
@@ -23,7 +24,6 @@ import {
     injectIntl,
     intlShape
 } from 'react-intl';
-require('../../assets/style/main.less')
 const labels = defineMessages({
     title: {
         id: 'home_title',
@@ -91,7 +91,7 @@ class Home extends Component {
             function onGlobeClick(event) {
                 clickCount++;
                 if (clickCount === 1) {
-                    singleClickTimer = setTimeout(function() {
+                    singleClickTimer = setTimeout(function () {
                         clickCount = 0;
                     }, 400);
                 } else if (clickCount === 2) {
@@ -123,14 +123,14 @@ class Home extends Component {
                     var tweenRot = getTween.call(camera, 'rotation', temp.rotation);
                     d3.timer(tweenRot);
                     if (continent !== null) {
-                        setTimeout(function() {
+                        setTimeout(function () {
                             var zoom_val = 1;
-                            d3.timer(function() {
+                            d3.timer(function () {
                                 zoom_val += 0.1;
                                 camera.zoom = zoom_val;
                                 camera.updateProjectionMatrix();
 
-                                if(zoom_val >= 4) {
+                                if (zoom_val >= 4) {
                                     browserHistory.push('/continent/' + slugify(continent.code, '_'));
                                     return true;
                                 }

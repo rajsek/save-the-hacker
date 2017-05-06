@@ -4,9 +4,8 @@
 	font-family: 'Font';
 	src: url('@{fontPath}/Font-Regular.eot?#iefix') format('embedded-opentype'),
 		url('@{fontPath}/Font-Regular.woff') format('woff'),
-		url('@{fontPath}/Font-Regular.ttf')  format('truetype'),
-		url('@{fontPath}/Font-Regular.svg#Font-Regular') format('svg');
-	font-weight: normal;
+		url('@{fontPath}/Font-Regular.ttf')  format('truetype');
+        	font-weight: normal;
 	font-style: normal;
 }
 
@@ -270,4 +269,13 @@ header {
 			transform: rotate(90deg);
 		}
 	}
+}
+.map {
+    width: 1000px;
+    height: 500px;
+}
+.map > div:first-child {
+    width: 1000px;
+    height: 500px;
+    position: relative;
 }

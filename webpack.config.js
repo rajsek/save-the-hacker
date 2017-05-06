@@ -25,7 +25,7 @@ const rules = [
         test: /\.(less|css)$/,
         use: ExtractTextWebpackPlugin.extract({
             fallback: 'style-loader',
-            use : [
+            use: [
                 {
                     loader: 'css-loader',
                     options: {
@@ -80,17 +80,17 @@ const plugins = [
     // To prevent longterm cache of vendor chunks
     // extract a 'manifest' chunk, then include it to the app
     new webpack.optimize.CommonsChunkPlugin({
-        names: [ 'lib', 'manifest' ]
+        names: ['lib', 'manifest']
     })
 ]
 
 const reportsPlugin = !showReport ? [] :
-[
-    new BundleAnalyzerPlugin({
-        analyzerMode: 'static',
-        openAnalyzer: false
-    })
-]
+    [
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            openAnalyzer: false
+        })
+    ]
 
 const localDevPlugins = [
     new webpack.HotModuleReplacementPlugin(),
@@ -108,7 +108,7 @@ const buildPlugins = [
     })
 ]
 
-const getEntryFiles = function() {
+const getEntryFiles = function () {
     var entry = new Object();
 
     entry.main = [path.resolve(__dirname, 'public/src/index')];

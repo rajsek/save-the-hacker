@@ -18,7 +18,6 @@ import {
 import ReactStreetview from 'react-streetview';
 
 import {defineMessages, FormattedMessage, FormattedDate, injectIntl, intlShape} from 'react-intl';
-require('../../assets/style/main.less')
 
 class Maps extends Component {
     constructor() {
