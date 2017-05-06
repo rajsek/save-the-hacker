@@ -224,35 +224,28 @@ class Home extends Component {
                 _this.setState({
                     pageProgress: 'waveIn-1 loaded'
                 });
-            }, 2000);
+            }, 1800);
 
             setTimeout(()=>{
                 _this.setState({
                     pageProgress: 'waveIn-2 loaded',
                     welcomeText: 'Choose a challange to play'
                 });
-            }, 6000);
+            }, 3600);
 
             setTimeout(()=>{
                 _this.setState({
                     pageProgress: 'waveIn-3 loaded',
                     welcomeText: 'Play it ! Complete all the challanges !!'
                 });
-            }, 10000);
-
-            setTimeout(()=>{
-                _this.setState({
-                    pageProgress: 'waveIn-4 loaded',
-                    welcomeText: ''
-                });
-            }, 14000);
+            }, 5400);
 
             setTimeout(()=>{
                 _this.setState({
                     pageProgress: 'globeReady loaded',
                     welcomeText: ''
                 });
-            }, 16000);
+            }, 7200);
         }
         intro(this);
 
@@ -293,9 +286,10 @@ class Home extends Component {
                 <div className="travelPick"></div>
                 <div id="webgl_container" className="globeContainer"></div>
                 <div className="staticGlobe"></div>
-                <h2>{this.state.welcomeText}</h2>
                 <div className="waveBlock"><div></div><div></div></div>
                 <Header />
+                <h2>{this.state.welcomeText}</h2>
+                <div className="popin"><span>Double click a continent</span></div>
                 <div className="loadingOverlay"></div>
                 <div className="loadingLogo"><figure></figure></div>
             </div>

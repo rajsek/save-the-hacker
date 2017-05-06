@@ -1,4 +1,4 @@
-  var continent = {
+var continent = {
   "asia": {
     "center": {
       "lat": "29.189141982590748",
@@ -23,7 +23,7 @@
     "zoom": "4",
     "zoom_mobile": "3"
   },
-  "south_america": {
+  "south_ameria": {
     "center": {
       "lat": "-20.46968180145309",
       "lng": "-66.54754018740903"
