@@ -79,7 +79,7 @@
   },
   "scripts": {
     "heroku-prebuild": "webpack -p --colors",
-    "startLocale": "cross-env NODE_ENV=local SHOW_REPORT=yes node index.js",
+    "startLocal": "cross-env NODE_ENV=local SHOW_REPORT=yes node index.js",
     "start": "npm run build && cross-env NODE_ENV=production node index.js",
     "build": "cross-env NODE_ENV=production webpack -p --colors",
     "buildWithReport": "cross-env NODE_ENV=production SHOW_REPORT=yes webpack -p --colors",
