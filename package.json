@@ -77,7 +77,7 @@
     "node": "6.10.2"
   },
   "scripts": {
-    "heroku-prebuild": "npm run build",
+    "heroku-prebuild": "cross-env NODE_ENV=production webpack -p --colors",
     "startLocale": "cross-env NODE_ENV=local SHOW_REPORT=yes node index.js",
     "start": "cross-env NODE_ENV=production node index.js",
     "build": "cross-env NODE_ENV=production webpack -p --colors",
