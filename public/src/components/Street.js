@@ -79,7 +79,7 @@ class Maps extends Component {
                         ? ((this.props.streetData.distance > 10)
                             ? ((this.props.streetData.distance > 100)
                                 ? <div>
-                                        You are more than 100 metres away
+                                        You are more than {this.props.streetData.distance} metres away
                                     </div>
                                 : <div>
                                     You are more than {this.props.streetData.distance}

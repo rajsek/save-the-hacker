@@ -13,6 +13,7 @@ export default function (state = fromJS({data: {}, distance: 100}), action) {
                 data: action.data,
                 porno: action.porno,
                 lat:27.1733511,
+                title:action.title,
                 lng:78.042109,
                 heading:72,
                 pitch:0,

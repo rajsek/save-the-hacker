@@ -95,54 +95,61 @@ export const LoadQuestion = (id) => {
     };
 }
 export const getStreetViewPlace = (id) => {
-    markerJson.map((val) => {
-        if(val.Id == id) {
-            var my_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lat);
-            var my_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lng);
-            var new_lat = 27.1731146;
-            var new_long = 78.0429197;
-            return dispatch => {
-                dispatch({
-                    type: FIND_STREET_VIEW,
-                    data: {
-                        position: {
-                            lat: new_lat,
-                            lng: new_long
-                        },
-                        pov: {
-                            heading: 75,
-                            pitch: 0
-                        },
-                        zoom: 1
-                    },
-                    porno: [
-                        {
-                            id:parseFloat(my_lat).toFixed(2)+'_'+parseFloat(my_long).toFixed(2),
+    return dispatch => {
+        markerJson.map((val) => {
+            if(val.Id == id) {
+                var new_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lat);
+                var new_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lng);
+                    var porno = [];
+                    var pornos = JSON.parse(JSON.stringify(eval('(' + val.Objective + ')'))).destinations;
+                    console.log(pornos);
+                    for(var i in pornos) {
+                        var s = pornos[i];
+                        porno.push({
+                            id:i,
                             heading:{
-                                min:70,
-                                max:76
+                                min:s.heading.min,
+                                max:s.heading.max
                             },
-                            pitch: {
-                                min:0,
-                                max:1
+                            pitch:{
+                                min:s.pitch.min,
+                                max:s.pitch.max
                             }
-                        }
-                    ]
-                });
-            };
-        }
+                        })
+                    };
+                    dispatch({
+                        type: FIND_STREET_VIEW,
+                        title:val.Title,
+                        data: {
+                            position: {
+                                lat: new_lat,
+                                lng: new_long
+                            },
+                            pov: {
+                                heading: parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).head),
+                                pitch: parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).pitch)
+                            },
+                            zoom: 1
+                        },
+                        porno: porno
+                    });
 
-    });
+            }
+
+        });
+     };
 }
 export const getStreetViewData = (id) => {
+    return dispatch => {
      markerJson.map((val) => {
         if(val.Id == id) {
-            console.log(JSON.stringify(eval('(' + val.Data + ')')));
+            //console.log(typeof(val.Data));
             var my_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lat);
             var my_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start.lng);
             var new_lat = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Objective + ')'))).lat);
             var new_long = parseFloat(JSON.parse(JSON.stringify(eval('(' + val.Objective + ')'))).lng);
-            return dispatch => {
+            console.log(new_long);
+
                 dispatch({
                     type: GET_STREET_VIEW,
                     data: {
@@ -162,11 +169,12 @@ export const getStreetViewData = (id) => {
                         heading: 75,
                         pitch: 0
                     },
-                    time: 300
+                    time: JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).time
                 });
-            };
+
         }
      });
+    };
 }
 export const changeInfoWIndow = (id) => {
     return dispatch => {
@@ -180,10 +188,7 @@ export function loadMapMarkers(continent) {
         console.log(val.Continent+(val.Continent == continent.replace('_',' ')));
         if(val.Objective != '' && val.Continent == continent.replace('_',' ')) {
             console.log(val);
-            var latlng = JSON.parse(JSON.stringify(eval('(' + val.Objective + ')')));
-            if(typeof(latlng.destinations) != 'undefined') {
-                latlng = latlng.destinations;
-            }
+            var latlng = JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))).start;
             //console.log(val.Id)
             //console.log(typeof(JSON.parse(JSON.stringify(eval('(' + latlng + ')')))));
             markers.push({

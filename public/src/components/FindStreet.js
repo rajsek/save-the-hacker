@@ -29,7 +29,7 @@ class Maps extends Component {
     componentDidMount() {
         this
             .props
-            .getStreetViewPlace();
+            .getStreetViewPlace(this.props.params.id);
 
     }
     componentWillReceiveProps(nexProps) {
@@ -80,11 +80,11 @@ class Maps extends Component {
                         streetViewPanoramaOptions={streetViewPanoramaOptions}
                         onPovChanged={pov => this.props.loadPov(pov)}/>
                 </div>
-                <div onClick={
+                <div>{this.props.streetData.title}<span onClick={
                     () => {
                         this.checkPlaceisRight();
                     }
-                }>Click</div>
+                }> Click Here</span></div>
                 {(this.props.streetData.win) ? <div>You won</div>
                         : ((this.props.streetData.load) ? <div>Try Again</div> : <div></div>)}
             </div>
