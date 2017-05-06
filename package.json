@@ -80,8 +80,9 @@
   },
   "scripts": {
     "startLocal": "cross-env NODE_ENV=local SHOW_REPORT=yes node index.js",
-    "start": "npm run build && cross-env NODE_ENV=production node index.js",
-    "build": "cross-env NODE_ENV=production webpack -p --colors",
+    "start": "cross-env NODE_ENV=production node index.js",
+    "build": "webpack -p --colors",
+    "postinstall": "webpack -p --colors",
     "buildWithReport": "cross-env NODE_ENV=production SHOW_REPORT=yes webpack -p --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
