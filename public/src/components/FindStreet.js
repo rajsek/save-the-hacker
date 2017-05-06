@@ -41,16 +41,26 @@ class Maps extends Component {
         var id = 0;
         this.props.streetData.porno.map((val) => {
             if(val.id == this.props.streetData.pano) {
+                var headings = {min: val.heading.min, max: val.heading.max, current: this.props.streetData.heading};
+                for(var i in headings)
+                {
+                    //"Clean" values in order to have the range [-180, 180]
+                    if(headings[i] < -180)
+                        headings[i] += 360;
+                    else if(headings[i] > 180)
+                        headings[i] -= 360;
+                }
+
                 var heading_wideness_max = 15,
-                heading_wideness = Math.abs(val.heading.min - val.heading.min);
+                heading_wideness = Math.abs(headings.max - headings.min);
 
                 if (heading_wideness < heading_wideness_max)
                 {
-                    val.heading.min -= (heading_wideness_max - heading_wideness) * .5;
-                    val.heading.max += (heading_wideness_max - heading_wideness) * .5;
+                    headings.min -= (heading_wideness_max - heading_wideness) * .5;
+                    headings.max += (heading_wideness_max - heading_wideness) * .5;
                 }
                 console.log('1 Passed')
-                if(val.heading.min <= this.props.streetData.heading && val.heading.max >= this.props.streetData.heading) {
+                if(headings.min <= headings.current && headings.max >= headings.current) {
                     console.log('2 Passed')
                     if(val.pitch.min <= this.props.streetData.pitch && val.pitch.max >= this.props.streetData.pitch) {
                         console.log('3 Passed');
