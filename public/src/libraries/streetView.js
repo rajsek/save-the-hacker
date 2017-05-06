@@ -197,7 +197,7 @@ var ReactStreetview = (function (_React$Component) {
                     document.createElement('span')
                 );
                 self.map.drag = document.querySelector('img[src*="img_flag.png"]');
-                console.log(self.map.drag)
+                console.log(self.map.drag);
                 var marker = document.querySelector('img[src*="img_flag.png"]');
                 self.map.marker = marker;
 
