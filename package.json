@@ -77,10 +77,10 @@
     "node": "6.10.2"
   },
   "scripts": {
-    "heroku-prebuild": "cross-env NODE_ENV=production webpack -p --colors",
+    "heroku-prebuild": "webpack -p --colors",
     "startLocale": "cross-env NODE_ENV=local SHOW_REPORT=yes node index.js",
     "start": "cross-env NODE_ENV=production node index.js",
-    "build": "cross-env NODE_ENV=production webpack -p --colors",
+    "build": "webpack -p --colors",
     "buildWithReport": "cross-env NODE_ENV=production SHOW_REPORT=yes webpack -p --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
