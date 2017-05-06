@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import curryRight from 'lodash.curryright';
 import { browserHistory } from 'react-router';
 import * as actions from '../actions';
+import Header from './Header';
 
 import {
     defineMessages,
@@ -34,6 +35,7 @@ class Continent extends Component {
 
         return (
             <div className="page menuPage">
+                <Header />
                 <h1>Continent {this.props.continent}</h1>
             </div>
         );

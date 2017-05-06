@@ -143,7 +143,7 @@ if (isLocalDev) { //webpack for local development
         var host = req.headers.host;
         var context = {};
 
-        context.app_env = process.env.APP_ENV;
+        context.fbAppId = config.app_id;
 
         res.render('index', context);
     });

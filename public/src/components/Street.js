@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
 import conf from '../conf';
+import Header from './Header';
 import {
     Map,
     KmlLayer,
@@ -63,29 +64,8 @@ class Maps extends Component {
         console.log(this.props.streetData);
         const streetViewPanoramaOptions = this.props.streetData.data;
         return (
-            <div className="map">
-                <div
-                    style={{
-                    width: '800px',
-                    height: '450px',
-                    backgroundColor: '#eeeeee'
-                }}>
-                    <div>{parseInt(this.props.streetData.time / 60)}
-                        M : {this.props.streetData.time % 60}
-                        S
-                    </div>
-                    {(this.props.streetData.time > 0)
-                        ? ((this.props.streetData.distance > 10)
-                            ? ((this.props.streetData.distance > 100)
-                                ? <div>
-                                        You are more than {this.props.streetData.distance} metres away
-                                    </div>
-                                : <div>
-                                    You are more than {this.props.streetData.distance}
-                                    metres away
-                                </div>)
-                            : <div>You won</div>)
-                        : <div>You Lost</div>}
+            <div className="page mapPage streetView">
+                <div className="map">
                     <ReactStreetview
                         onPositionChanged={position => {
                         console.log(position);
@@ -95,8 +75,22 @@ class Maps extends Component {
                         onLocationChanged={data => console.log(data)}
                         streetViewPanoramaOptions={streetViewPanoramaOptions}
                         onPovChanged={pov => console.log(pov)}/>
-                </div>
 
+                    <div>
+                    {parseInt(this.props.streetData.time / 60)}
+                        M : {this.props.streetData.time % 60}
+                        S
+                    </div>
+                    {(this.props.streetData.time > 0)
+                        ? ((this.props.streetData.distance > 50)
+                            ? <div>
+                                    You are {this.props.streetData.distance}
+                                    metres away
+                            </div>
+                            : <div>You won</div>)
+                        : <div>You Lost</div>}
+                </div>
+                <Header />
             </div>
         );
     }

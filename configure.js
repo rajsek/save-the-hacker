@@ -7,26 +7,20 @@ var config = {};
 switch(process.env.APP_ENV) {
     case 'production':
         config = {
-            sampleKey: 'xxx',
-            sampleSecret: 'yyy'
+            app_id: '124413508110737',
+            app_secret: '97b5c84fabead104639608f104618f84'
         }
     break;
     case 'staging':
         config = {
-            sampleKey: 'xxx',
-            sampleSecret: 'yyy'
-        }
-    break;
-    case 'development':
-        config = {
-            sampleKey: 'xxx',
-            sampleSecret: 'yyy'
+            app_id: '124415364777218',
+            app_secret: '3f715405bd3222a80e5bec81213bdaa4'
         }
     break;
     case 'local':
        config = {
-            sampleKey: 'xxx',
-            sampleSecret: 'yyy'
+            app_id: '124414508110637',
+            app_secret: '9ebf9dcb47f4abdd5be3ac3b47f6299d'
        }
     break;
 }

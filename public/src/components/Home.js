@@ -52,6 +52,38 @@ class Home extends Component {
         var camera = getCamera();
         var controls = getControls();
 
+        var app_id = fbAppId == "{{fbAppId}}" ? '124414508110637' : fbAppId;
+        //Facebook JS
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: app_id,
+                cookie: true,  // enable cookies to allow the server to access the session
+                xfbml: false,  // parse social plugins on this page
+                version: 'v2.8' // use version 2.1
+            });
+
+            FB.getLoginStatus(function (response) {
+                this.statusChangeCallback(response);
+            }.bind(this));
+        }.bind(this);
+
+        //Get Login State if Facebook already loaded
+        if (typeof FB != 'undefined') {
+            FB.getLoginStatus(function (response) {
+                this.statusChangeCallback(response);
+            }.bind(this));
+        }
+
+        // Load the SDK asynchronously
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
         d3.json('../../assets/data/continent.json', function (err, data) {
             d3.select("#loading").transition().duration(500)
                 .style("opacity", 0).remove();
@@ -188,42 +220,60 @@ class Home extends Component {
 
         function intro(_this) {
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'waveIn-1 loaded'
                 });
-            }, 2000);
+            }, 1800);
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'waveIn-2 loaded',
                     welcomeText: 'Choose a challange to play'
                 });
-            }, 6000);
+            }, 3600);
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'waveIn-3 loaded',
                     welcomeText: 'Play it ! Complete all the challanges !!'
                 });
-            }, 10000);
+            }, 5400);
 
-            setTimeout(()=>{
-                _this.setState({
-                    pageProgress: 'waveIn-4 loaded',
-                    welcomeText: ''
-                });
-            }, 14000);
-
-            setTimeout(()=>{
+            setTimeout(() => {
                 _this.setState({
                     pageProgress: 'globeReady loaded',
                     welcomeText: ''
                 });
-            }, 16000);
+            }, 7200);
         }
         intro(this);
 
+    }
+
+    statusChangeCallback(response) {
+        if (response.status == 'not_authorized' && document.getElementById('social_connect') != null) {
+            document.getElementById('social_connect').style.display = 'block';
+        }
+        else if (response.status === 'connected' && document.getElementById('social_connect') != null) {
+            document.getElementById('social_connect').style.display = 'none';
+
+            FB.api('/me?fields=id,name,first_name,last_name', (response) => {
+                this.props.saveUser(response.id, response.first_name, response.last_name);
+            });
+        }
+    }
+
+    checkLoginState() {
+        FB.getLoginStatus(function (response) {
+            this.statusChangeCallback(response);
+        }.bind(this));
+    }
+
+    handleFbClick(e) {
+        e.preventDefault();
+
+        FB.login(this.checkLoginState.bind(this), { scope: 'public_profile' });
     }
 
     render() {
@@ -236,11 +286,13 @@ class Home extends Component {
                 <div className="travelPick"></div>
                 <div id="webgl_container" className="globeContainer"></div>
                 <div className="staticGlobe"></div>
-                <h2>{this.state.welcomeText}</h2>
                 <div className="waveBlock"><div></div><div></div></div>
                 <Header />
+                <h2>{this.state.welcomeText}</h2>
+                <div className="popin"><span>Double click a continent</span></div>
                 <div className="loadingOverlay"></div>
                 <div className="loadingLogo"><figure></figure></div>
+                <button id="social_connect" className="fbButton btn btnDefault" onClick={this.handleFbClick.bind(this)}><span>Connect</span></button>
             </div>
         );
     }

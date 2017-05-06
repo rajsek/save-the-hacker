@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
 import conf from '../conf';
+import Header from './Header';
 import {
     Map,
     KmlLayer,
@@ -72,34 +73,33 @@ class Maps extends Component {
         console.log(this.props.streetData);
         const streetViewPanoramaOptions = this.props.streetData.data;
         return (
-            <div className="map">
-                <div
-                    style={{
-                    width: '800px',
-                    height: '450px',
-                    backgroundColor: '#eeeeee'
-                }}>
-
-                    <ReactStreetview
-                        onPanoChanged={position => {
-                            this.props.loadPano(position)
-                    }}
-                        onPositionChanged={position => {
-                            this.props.loadPosition(position)
-                    }}
-                        panos={this.props.streetData.porno}
-                        onLocationChanged={data => console.log(data)}
-                        apiKey={googleMapsApiKey}
-                        streetViewPanoramaOptions={streetViewPanoramaOptions}
-                        onPovChanged={pov => this.props.loadPov(pov)}/>
-                </div>
-                <div>{this.props.streetData.title}<span onClick={
-                    () => {
-                        this.checkPlaceisRight();
-                    }
-                }> Click Here</span></div>
-                {(this.props.streetData.win) ? <div>You won</div>
+            <div className="page mapPage streetView">
+                <div className="map">
+                    <div>
+                        <ReactStreetview
+                            onPanoChanged={position => {
+                                this.props.loadPano(position)
+                        }}
+                            onPositionChanged={position => {
+                                this.props.loadPosition(position)
+                        }}
+                            onLocationChanged={data => console.log(data)}
+                            apiKey={googleMapsApiKey}
+                            streetViewPanoramaOptions={streetViewPanoramaOptions}
+                            onPovChanged={pov => this.props.loadPov(pov)}/>
+                    </div>
+                    <div>
+                        {this.props.streetData.title}
+                        <span onClick={
+                                    () => {
+                                        this.checkPlaceisRight();
+                                    }
+                        }> Click Here</span>
+                    </div>
+                    {(this.props.streetData.win) ? <div>You won</div>
                         : ((this.props.streetData.load) ? <div>Try Again</div> : <div></div>)}
+                </div>
+                <Header />
             </div>
         );
     }

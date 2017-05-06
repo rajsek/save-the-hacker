@@ -22,6 +22,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 .map {
 	width: 1000px;
     height: 500px;
@@ -163,6 +164,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 12;
 }
 .appLogo {
     background-image: url('@{imgPath}/logo-etw-white.png');
@@ -205,9 +207,28 @@ header {
         color: #000;
         display: inline-block;
         font-size: 1.2em;
-        line-height: 3.9em;
+        line-height: 3.8em;
         text-align: center;
         width: 3.5em;
         height: 4em;
+    }
+}
+.popin {
+    background-image: url('@{imgPath}/map/bg-bubble.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: #000;
+    width: 10em;
+    height: 6em;
+    position: absolute;
+    top: 5em;
+    left: 50%;
+    margin-left: 10em;
+    span {
+        font-weight: 200;
+        margin: 1.55em 0 0 1em;
+        display: block;
+        font-size: .9em;
+        line-height: 1.2;
     }
 }
