@@ -122,7 +122,7 @@ class Home extends Component {
 
                     var tweenRot = getTween.call(camera, 'rotation', temp.rotation);
                     d3.timer(tweenRot);
-                    if (continent !== null) {
+                    if (continent !== null && continent.code != 'Antarctica') {
                         setTimeout(function () {
                             var zoom_val = 1;
                             d3.timer(function () {
@@ -149,7 +149,7 @@ class Home extends Component {
                 // Look for country at that latitude/longitude
                 var continent = geo.search(latlng[0], latlng[1]);
 
-                if (continent !== null && continent.code !== currentContinent) {
+                if (continent !== null && continent.code !== currentContinent && continent.code != 'Antarctica') {
                     // Track the current country displayed
                     currentContinent = continent.code;
 
