@@ -1,2 +1,10 @@
 export const SAMPLE_ACTION = 'SAMPLE_ACTION';
-export const LOCALE_CHANGE= 'LOCALE_CHANGE'
+export const LOCALE_CHANGE = 'LOCALE_CHANGE';
+export const MAP_MARKER = 'MAP_MARKER';
+export const CHANGE_INFO_WINDOW = 'CHANGE_INFO_WINDOW';
+export const GET_STREET_VIEW = 'GET_STREET_VIEW';
+export const CHANGE_DISTANCE = 'CHANGE_DISTANCE';
+export const ROTATE_SECOND = 'ROTATE_SECOND';
+export const SELECTED = 'SELECTED';
+export const FAILED = 'FAILED';
+export const LOADQUESTION = 'LOADQUESTION';
