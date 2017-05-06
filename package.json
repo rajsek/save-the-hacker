@@ -75,7 +75,8 @@
     "winston": "^2.3.1"
   },
   "engines": {
-    "node": "6.10.2"
+    "node": "6.10.2",
+    "npm": "3.10.10"
   },
   "scripts": {
     "startLocal": "cross-env NODE_ENV=local SHOW_REPORT=yes node index.js",
