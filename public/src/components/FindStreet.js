@@ -15,7 +15,7 @@ import {
     MapControl,
     SearchBox
 } from 'google-react-maps';
-import ReactStreetview from 'react-streetview';
+import ReactStreetview from '../libraries/streetView';
 
 import {defineMessages, FormattedMessage, FormattedDate, injectIntl, intlShape} from 'react-intl';
 require('../../assets/style/main.less')
@@ -40,8 +40,7 @@ class Maps extends Component {
         console.log(this.props.streetData);
         var id = 0;
         this.props.streetData.porno.map((val) => {
-            console.log(parseFloat(this.props.streetData.lat).toFixed(2)+'_'+parseFloat(this.props.streetData.lng).toFixed(2));
-            if(val.id == parseFloat(this.props.streetData.lat).toFixed(2)+'_'+parseFloat(this.props.streetData.lng).toFixed(2)) {
+            if(val.id == this.props.streetData.pano) {
                 console.log('1 Passed')
                 if(val.heading.min <= this.props.streetData.heading && val.heading.max >= this.props.streetData.heading) {
                     console.log('2 Passed')
@@ -72,6 +71,9 @@ class Maps extends Component {
                 }}>
 
                     <ReactStreetview
+                        onPanoChanged={position => {
+                            this.props.loadPano(position)
+                    }}
                         onPositionChanged={position => {
                             this.props.loadPosition(position)
                     }}

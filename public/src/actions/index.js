@@ -13,7 +13,8 @@ import {
     LOAD_POSITION,
     LOAD_POV,
     MAKE_WIN,
-    MAKE_LOSS
+    MAKE_LOSS,
+    LOAD_PANO
 } from './actionTypes';
 import markerJson from '../../../config/src/marker.json';
 import cookies from 'cookie-jeep';
@@ -93,6 +94,11 @@ export const LoadQuestion = (id) => {
         });
 
     };
+}
+export const loadPano = (pano) => {
+    return dispatch => {
+        dispatch({type: LOAD_PANO, pano: pano})
+    }
 }
 export const getStreetViewPlace = (id) => {
     return dispatch => {

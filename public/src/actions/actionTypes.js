@@ -15,3 +15,4 @@ export const LOAD_POSITION = 'LOAD_POSITION';
 export const LOAD_POV = 'LOAD_POV';
 export const MAKE_WIN = 'MAKE_WIN';
 export const MAKE_LOSS = 'MAKE_LOSS';
+export const LOAD_PANO = 'LOAD_PANO';
