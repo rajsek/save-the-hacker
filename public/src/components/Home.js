@@ -52,6 +52,38 @@ class Home extends Component {
         var camera = getCamera();
         var controls = getControls();
 
+        var app_id = fbAppId == "{{fbAppId}}" ? '124414508110637' : fbAppId;
+        //Facebook JS
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: app_id,
+                cookie: true,  // enable cookies to allow the server to access the session
+                xfbml: false,  // parse social plugins on this page
+                version: 'v2.8' // use version 2.1
+            });
+
+            FB.getLoginStatus(function(response) {
+                this.statusChangeCallback(response);
+            }.bind(this));
+        }.bind(this);
+
+        //Get Login State if Facebook already loaded
+        if(typeof FB != 'undefined') {
+            FB.getLoginStatus(function(response) {
+                this.statusChangeCallback(response);
+            }.bind(this));
+        }
+
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
         d3.json('../../assets/data/continent.json', function (err, data) {
             d3.select("#loading").transition().duration(500)
                 .style("opacity", 0).remove();
@@ -224,6 +256,31 @@ class Home extends Component {
         }
         intro(this);
 
+    }
+
+    statusChangeCallback(response) {
+        if(response.status == 'not_authorized' && document.getElementById('social_connect') != null) {
+            document.getElementById('social_connect').style.display = 'block';
+        }
+        else if(response.status === 'connected' && document.getElementById('social_connect') != null) {
+            document.getElementById('social_connect').style.display = 'none';
+
+            FB.api('/me?fields=id,name,first_name,last_name,', (response) => {
+                this.props.saveUser(response.id, response.first_name, response.last_name);
+            });
+        }
+    }
+
+    checkLoginState() {
+        FB.getLoginStatus(function(response) {
+            this.statusChangeCallback(response);
+        }.bind(this));
+    }
+
+    handleFbClick(e) {
+        e.preventDefault();
+
+        FB.login(this.checkLoginState.bind(this), {scope: 'public_profile'});
     }
 
     render() {

@@ -5,11 +5,7 @@ import cookies from 'cookie-jeep';
 
 import conf from '../conf';
 
-var default_locale = 'en_US';
-
-const locale = (cookies.read('locale') != null && conf.i18n.langs.indexOf(cookies.read('locale')))
-    ? cookies.read('locale')
-    : default_locale;
+var locale = 'en_US';
 
 function getNewState(state, newState) {
     return state.merge(newState);

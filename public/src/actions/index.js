@@ -14,7 +14,9 @@ import {
     LOAD_POV,
     MAKE_WIN,
     MAKE_LOSS,
-    LOAD_PANO
+    LOAD_PANO,
+    SAVE_USER,
+    SAVE_CHALLENGE
 } from './actionTypes';
 import markerJson from '../../../config/src/marker.json';
 import ContinentData from '../libraries/continent';
@@ -212,3 +214,13 @@ export function loadMapMarkers(continent) {
         });
     };
 };
+
+export const saveUser(id, first_name, last_name) {
+    axios.post('/api/saveUser', {
+        id_fb: response.id,
+        first_name: response.first_name,
+        last_name: response.last_name,
+    });
+
+    return null;
+}
