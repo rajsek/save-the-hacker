@@ -1,0 +1,54 @@
+{
+    "streetViews": [
+        {
+            "name": "Taj-Mahal",
+            "streetView": "https://www.google.com/maps/@27.1738903,78.0419927,3a,75y,5.72h,90t/data=!3m6!1e1!3m4!1s4WnUj5d9NaCn0WjD4t67jA!3e5!7i13312!8i6656",
+            "mapCoords": "27.1738903,78.0414455"
+        },
+        {
+            "name": "Pyramid-of-Khufu",
+            "streetView": "https://www.google.com/maps/@29.980389,31.132983,3a,75y,135.01h,90t/data=!3m4!1e1!3m2!1sYNAbjfTcr5hJhXBARMewqg!3e5",
+            "mapCoords": "29.9803885,31.1324353"
+        },
+        {
+            "name": "christ-the-redeemer",
+            "streetView": "https://www.google.com/maps/@-22.951822,-43.210365,3a,75y,233.65h,90t/data=!3m4!1e1!3m2!1sqWVoD9tYuOAjQ43U6Y56_w!3e5",
+            "mapCoords": "-22.9518225,-43.2109124"
+        },
+        {
+            "name": "mount-fuji",
+            "streetView": "https://www.google.com/maps/@29.980389,31.132983,3a,75y,135.01h,90t/data=!3m4!1e1!3m2!1sYNAbjfTcr5hJhXBARMewqg!3e5",
+            "mapCoords": "35.4283933,138.8618282"
+        },
+        {
+            "name": "airport-and-station,tokyo-station-1",
+            "streetView": "https://www.google.com/maps/@35.680539,139.765626,3a,75y,106.43h,90t/data=!3m4!1e1!3m2!1sRpPPYHVxEs6cmFcDzah29w!3e5",
+            "mapCoords": "35.6822479,139.7657064"
+        },
+        {
+            "name": "Dubai burj-khalifa",
+            "streetView": "https://www.google.com/maps/@25.195232,55.276428,3a,75y,322.17h,90t/data=!3m6!1e1!3m4!1seznax7JvTOXrAztKUfqj-A!3e5!7i13312!8i6656",
+            "mapCoords": "25.195232,55.2758808"
+        },
+        {
+            "name": "Sydney Opera House",
+            "streetView": "https://www.google.com/maps/@-33.857401,151.2153692,3a,75y,273.52h,90t/data=!3m6!1e1!3m4!1s79fqFqktwbiURCtPbJWW0g!2e0!7i13312!8i6656",
+            "mapCoords": "-33.857401,151.214822"
+        },
+        {
+            "name": "Centurylink-field",
+            "streetView": "https://www.google.com/maps/@47.59525,-122.3316443,3a,75y,164.34h,90t/data=!3m6!1e1!3m4!1s4Nrum5-fRnq-Vx6PFbQKRA!3e5!7i13312!8i6656",
+            "mapCoords": "47.59525,-122.3321915"
+        },
+        {
+            "name": "Towers-of-angkor-wat",
+            "streetView": "https://www.google.com/maps/@13.412283,103.8667697,3a,75y,52.88h,90t/data=!3m6!1e1!3m4!1scLgtpMlnNoITZSNX1RfvsQ!3e5!7i13312!8i6656",
+            "mapCoords": "13.412283,103.8662225"
+        },
+        {
+            "name": "Hong-kong-highlights",
+            "streetView": "https://www.google.com/maps/@22.2814232,114.1892491,3a,75y,233.63h,90t/data=!3m6!1e1!3m4!1sQT7qzAg_0ooAAAQJOCqmSQ!3e5!7i13312!8i6656",
+            "mapCoords": "22.2814232,114.1892491"
+        }
+    ]
+}
