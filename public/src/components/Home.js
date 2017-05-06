@@ -16,6 +16,7 @@ import * as topojson from 'topojson/build/topojson';
 require('../../assets/style/main.less')
 
 import d3 from 'd3';
+import Header from './Header';
 
 import {
     defineMessages,
@@ -188,8 +189,15 @@ class Home extends Component {
         const { formatMessage } = this.props.intl;
 
         return (
-            <div>
-                <div id="webgl_container"></div>
+            <div className="page homePage">
+                <div className="travelPick"></div>
+                <div id="webgl_container" className="globeContainer"></div>
+                <div className="staticGlobe"></div>
+                <h2>Select a continent to explore</h2>
+                <div className="waveBlock"><div></div><div></div></div>
+                <Header />
+                <div className="loadingOverlay"></div>
+                <div className="loadingLogo"><figure></figure></div>
             </div>
         );
     }
