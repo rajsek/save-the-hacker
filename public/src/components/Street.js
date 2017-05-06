@@ -20,15 +20,15 @@ import ReactStreetview from 'react-streetview';
 import {defineMessages, FormattedMessage, FormattedDate, injectIntl, intlShape} from 'react-intl';
 
 class Maps extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.time = '';
     }
     componentWillMount() {}
     componentDidMount() {
         this
             .props
-            .getStreetViewData();
+            .getStreetViewData(this.props.params.id);
         this.time = window.setInterval(() => {
             this
                 .props
@@ -78,7 +78,7 @@ class Maps extends Component {
                         ? ((this.props.streetData.distance > 10)
                             ? ((this.props.streetData.distance > 100)
                                 ? <div>
-                                        You are more than 100 metres away
+                                        You are more than {this.props.streetData.distance} metres away
                                     </div>
                                 : <div>
                                     You are more than {this.props.streetData.distance}
@@ -92,6 +92,7 @@ class Maps extends Component {
                         this.getDistanceFromLatLonInKm(position.lat(), position.lng(), this.props.streetData.latitude, this.props.streetData.longitude)
                     }}
                         apiKey={googleMapsApiKey}
+                        onLocationChanged={data => console.log(data)}
                         streetViewPanoramaOptions={streetViewPanoramaOptions}
                         onPovChanged={pov => console.log(pov)}/>
                 </div>
