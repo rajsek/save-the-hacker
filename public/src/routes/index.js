@@ -6,13 +6,16 @@ import Continent from '../components/Continent';
 import Map from '../components/Map';
 import Street from '../components/Street';
 import FindMap from '../components/FindOnMap';
-export default (
+
+import FindStreet from '../components/FindStreet';
+export default(
     <Route path="/" component={App}>
-        <IndexRoute component={Home} />
-        <Route path="continent(/:continent)" component={Continent} />
-        <Route path="home" component={Home} />
-        <Route path="map" component={Map} />
-        <Route path="street" component={Street} />
-        <Route path="find-map" component={FindMap} />
+        <IndexRoute component={Home}/>
+        <Route path="home" component={Home}/>
+        <Route path="continent/:name" component={Map}/>
+        <Route path="street/:id" component={Street}/>
+        <Route path="find-map/:id" component={FindMap}/>
+        <Route path="find-street/:id" component={FindStreet}/>
+
     </Route>
 );
