@@ -16,3 +16,5 @@ export const LOAD_POV = 'LOAD_POV';
 export const MAKE_WIN = 'MAKE_WIN';
 export const MAKE_LOSS = 'MAKE_LOSS';
 export const LOAD_PANO = 'LOAD_PANO';
+export const SAVE_USER = 'SAVE_USER';
+export const SAVE_CHALLENGE = 'SAVE_CHALLENGE';

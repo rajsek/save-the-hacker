@@ -244,13 +244,15 @@ class Maps extends Component {
                             }}>
                                 <div className={'selectChallange challange-' + val.get('id')} onClick={() => {
 
-                                        if(val.get('type') == 'map') {
-                                            this.props.router.push('/find-map/'+val.get('id'));
-                                        } else if(val.get('type')  == 'time') {
-                                            this.props.router.push('/street/'+val.get('id'));
-                                        } else if(val.get('type') == 'picture') {
-                                            this.props.router.push('/find-street/'+val.get('id'));
-                                        }
+                                    if(val.get('type') == 'map') {
+                                        this.props.router.push('/find-map/'+val.get('id'));
+                                    } else if(val.get('type')  == 'time') {
+                                        window.location.href = '/street/'+val.get('id');
+                                        //this.props.router.push('/street/'+val.get('id'));
+                                    } else if(val.get('type') == 'picture') {
+                                        window.location.href = '/find-street/'+val.get('id');
+                                        //this.props.router.push('/find-street/'+val.get('id'));
+                                    }
 
                                     }}>
                                     <a className="close">&times;</a>
