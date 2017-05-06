@@ -4,7 +4,7 @@ var router = express.Router();
 var i18n = require('i18n');
 
 var requestIp = require('request-ip');
-var models = require('../models');
+// var models = require('../models');
 var locales = ['en_US', 'ar_AR', 'ar_TN'];
 var default_locale = 'en_US';
 var email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
