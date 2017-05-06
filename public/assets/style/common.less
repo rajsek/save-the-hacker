@@ -74,4 +74,52 @@ header {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+}
+.appLogo {
+    background-image: url('@{imgPath}/logo-etw-white.png');
+    background-position: 0 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: none;
+    position: absolute;
+    text-indent: -999em;
+    top: 1em;
+    left: 1em;
+    height: 11em;
+    width: 10em;
+    .globeReady & {
+        display: block;
+    }
+}
+.gameStatus {
+    position: absolute;
+    top: 2em;
+    right: 1.7em;
+    color: #fff;
+    font-size: 0.9em;
+    small {
+        display: inline-block;
+        font-weight: 200;
+        width: 8em;
+        font-size: 1em;
+        letter-spacing: 0.1em;
+        text-align: right;
+        margin-right: 0.5em;
+        vertical-align: top;
+        position: relative;
+        top: 1em;
+    }
+    strong {
+        background-image: url('@{imgPath}/map/icon-total.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        color: #000;
+        display: inline-block;
+        font-size: 1.2em;
+        line-height: 3.9em;
+        text-align: center;
+        width: 3.5em;
+        height: 4em;
+    }
 }
