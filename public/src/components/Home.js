@@ -290,9 +290,12 @@ class Home extends Component {
                 <Header />
                 <h2>{this.state.welcomeText}</h2>
                 <div className="popin"><span>Double click a continent</span></div>
+                <div className="socialConnect">
+                    <small>Connect with your social account</small>
+                    <button id="social_connect" className="fbButton" onClick={this.handleFbClick.bind(this)}><span>Connect</span></button>
+                </div>
                 <div className="loadingOverlay"></div>
                 <div className="loadingLogo"><figure></figure></div>
-                <button id="social_connect" className="fbButton btn btnDefault" onClick={this.handleFbClick.bind(this)}><span>Connect</span></button>
             </div>
         );
     }
