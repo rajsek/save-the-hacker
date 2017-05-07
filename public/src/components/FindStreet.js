@@ -31,13 +31,6 @@ class Maps extends Component {
         this
             .props
             .getStreetViewPlace(this.props.params.id);
-<<<<<<< HEAD
-=======
-            console.log(this.props.streetData);
-
-        console.log(this.props);
-
->>>>>>> 3529059c8c9e7b87a7d78474fdb2bec9e8d08aab
     }
     componentWillReceiveProps(nexProps) {
 
