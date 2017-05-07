@@ -18,7 +18,9 @@ import {
     SAVE_USER,
     SAVE_CHALLENGE,
     MAKE_ENABLED,
-    MAKE_DISABLED
+    MAKE_DISABLED,
+    SHOW_FRAME,
+    HIDE_FRAME
 } from './actionTypes';
 import markerJson from '../../../config/src/marker.json';
 import Places from '../libraries/places';
@@ -74,6 +76,17 @@ export const Selected = () => {
 export const Failed = () => {
     return dispatch => {
         dispatch({ type: FAILED });
+    };
+}
+export const showFrame = () => {
+    return dispatch => {
+        dispatch({ type: SHOW_FRAME });
+    };
+}
+
+export const hideFrame = () => {
+    return dispatch => {
+        dispatch({ type: HIDE_FRAME });
     };
 }
 export const enableCamera = () => {

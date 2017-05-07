@@ -39,16 +39,50 @@ class Maps extends Component {
     }
     checkPlaceSatisfied() {
         var id = 0;
+        var k = 0;
         console.log(this.props.streetData.pano);
         this.props.streetData.porno.map((val) => {
             if(val.id == this.props.streetData.pano) {
                 id = 1;
-                return this.props.enableCamera();
+                this.props.enableCamera();
+                var headings = {min: val.heading.min, max: val.heading.max, current: this.props.streetData.heading};
+                for(var i in headings)
+                {
+                    //"Clean" values in order to have the range [-180, 180]
+                    if(headings[i] < -180)
+                        headings[i] += 360;
+                    else if(headings[i] > 180)
+                        headings[i] -= 360;
+                }
+
+                var heading_wideness_max = 15,
+                heading_wideness = Math.abs(headings.max - headings.min);
+
+                if (heading_wideness < heading_wideness_max)
+                {
+                    headings.min -= (heading_wideness_max - heading_wideness) * .5;
+                    headings.max += (heading_wideness_max - heading_wideness) * .5;
+                }
+                console.log('1 Passed')
+                if(headings.min <= headings.current && headings.max >= headings.current) {
+                    console.log('2 Passed')
+                    if(val.pitch.min <= this.props.streetData.pitch && val.pitch.max >= this.props.streetData.pitch) {
+                        console.log('3 Passed');
+                        k = 1;
+                        this.props.showFrame();
+                    }
+                }
             }
+
         });
         if(id == 0) {
-            return this.props.disableCamera();
+             this.props.disableCamera();
         }
+        if(k == 0) {
+             this.props.hideFrame();
+        }
+
+        return true;
 
     }
     checkPlaceisRight() {
@@ -101,6 +135,7 @@ class Maps extends Component {
         const {formatMessage} = this.props.intl;
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
         var hide = (this.props.streetData.win || this.props.streetData.failed) ? '' : 'hide';
+        var hideFrame = (!this.props.streetData.frame) ? 'hide' : '';
         const streetViewPanoramaOptions = this.props.streetData.data;
         return (
             <div className="page mapPage streetView">
@@ -125,9 +160,9 @@ class Maps extends Component {
                     </div>
                     <div className="challangeInfo ciCamera">
                         <figure></figure>
-                        <h3><span>Take a picture at Taj Mahal</span></h3>
+                        <h3><span>Take a picture at {this.props.streetData.title}</span></h3>
                     </div>
-                    <div className="pictureFrame hide"></div>
+                    <div className={`pictureFrame ${hideFrame}`}></div>
                     <div className="gameProgress">
                         {(this.props.streetData.enabled) ? <button className="btnCapture" onClick={
                                     () => {
