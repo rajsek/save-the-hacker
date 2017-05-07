@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 //import TrackballControls from 'three-trackballcontrols';
-import TrackballControls from './trackball';
+//import TrackballControls from './trackball';
+var OrbitControls = require('three-orbit-controls')(THREE)
 import d3 from 'd3';
 
 var canvas, renderer, camera, scene, light, controls;
@@ -26,13 +27,13 @@ export function initScene() {
     light.position.set(0, 1000, 0);
     scene.add(light);
 
-    controls = new TrackballControls( camera, document.getElementById('webgl_container') );
-
-    controls.rotateSpeed = 1.0;
+    //controls = new TrackballControls( camera, document.getElementById('webgl_container') );
+    controls = new OrbitControls(camera);
+    /*controls.rotateSpeed = 1.0;
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
     controls.minDistance = 1000;
-    controls.maxDistance = 3000;
+    controls.maxDistance = 3000;*/
     window.addEventListener('resize', onWindowResize, false);
 
     function onWindowResize() {
