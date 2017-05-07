@@ -3,6 +3,7 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
+import { browserHistory } from 'react-router';
 import conf from '../conf';
 import Header from './Header';
 import {
@@ -72,8 +73,16 @@ class Maps extends Component {
         if(id == 0) {
             return this.props.makeLoss();
         }
-
     }
+
+    goToGlobe(){
+        browserHistory.push('/home');
+    }
+
+    goToContinent(){
+        browserHistory.goBack();
+    }
+
     render() {
         const {formatMessage} = this.props.intl;
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
@@ -130,8 +139,8 @@ class Maps extends Component {
                             : <div></div>)}
                         </main>
                         <div className="actions">
-                            <a role="button" className="btnGlobe"><i></i> <span>Goto Globe</span></a>
-                            <a role="button" className="btnContinet"><i></i> <span>Goto Continent</span></a>
+                            <a role="button" className="btnGlobe" onClick={this.goToGlobe.bind(this)}><i></i> <span>Goto Globe</span></a>
+                            <a role="button" className="btnContinet" onClick={this.goToContinent.bind(this)}><i></i> <span>Goto Continent</span></a>
                         </div>
                     </div>
                 </div>
