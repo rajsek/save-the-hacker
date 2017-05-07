@@ -15,10 +15,6 @@ class Header extends Component {
         return (
             <header>
                 <a className="appLogo" title="Explore the world">Explore the world</a>
-                <div className="gameStatus">
-                    <small>Challanges Completed</small>
-                    <strong>{this.props.nb_finished}/15</strong>
-                </div>
             </header>
         );
     }
