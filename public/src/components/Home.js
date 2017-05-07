@@ -40,7 +40,7 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
-            welcomeText: 'Select your favorite destination',
+            welcomeText: '',
             pageProgress: ''
         };
     }
@@ -222,30 +222,24 @@ class Home extends Component {
 
             setTimeout(() => {
                 _this.setState({
-                    pageProgress: 'waveIn-1 loaded'
+                    pageProgress: 'waveIn-1 loaded',
+                    welcomeText: 'Choose a continent to start'
                 });
             }, 1800);
 
             setTimeout(() => {
                 _this.setState({
-                    pageProgress: 'waveIn-2 loaded',
-                    welcomeText: 'Choose a challange to play'
+                    pageProgress: 'waveIn-4 loaded',
+                    welcomeText: 'Choose a continent to start'
                 });
             }, 3600);
 
             setTimeout(() => {
                 _this.setState({
-                    pageProgress: 'waveIn-3 loaded',
-                    welcomeText: 'Play it ! Complete all the challanges !!'
-                });
-            }, 5400);
-
-            setTimeout(() => {
-                _this.setState({
                     pageProgress: 'globeReady loaded',
-                    welcomeText: ''
+                    welcomeText: 'Choose a continent to start'
                 });
-            }, 7200);
+            }, 5600);
         }
         intro(this);
 
