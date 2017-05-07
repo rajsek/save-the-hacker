@@ -45,7 +45,6 @@ export function loadPosition(position) {
     }
 }
 export function loadPov(pov) {
-    console.log(pov);
     return dispatch => {
         dispatch({ type: LOAD_POV, heading: pov.heading, pitch: pov.pitch })
     }

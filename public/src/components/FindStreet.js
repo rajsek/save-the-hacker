@@ -31,15 +31,12 @@ class Maps extends Component {
         this
             .props
             .getStreetViewPlace(this.props.params.id);
-            console.log(this.props.streetData);
-
     }
     componentWillReceiveProps(nexProps) {
 
 
     }
     checkPlaceisRight() {
-        console.log(this.props.streetData);
         var id = 0;
         this.props.streetData.porno.map((val) => {
             if(val.id == this.props.streetData.pano) {
@@ -80,7 +77,7 @@ class Maps extends Component {
     render() {
         const {formatMessage} = this.props.intl;
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
-        console.log(this.props.streetData);
+
         const streetViewPanoramaOptions = this.props.streetData.data;
         return (
             <div className="page mapPage streetView">
@@ -95,7 +92,7 @@ class Maps extends Component {
                         }}
 
                             panos={this.props.streetData.porno}
-                            onLocationChanged={data => console.log(data)}
+                            onLocationChanged={data => {}}
                             apiKey={googleMapsApiKey}
                             streetViewPanoramaOptions={streetViewPanoramaOptions}
                             onPovChanged={pov => this.props.loadPov(pov)}/>

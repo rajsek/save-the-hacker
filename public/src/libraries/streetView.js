@@ -47,11 +47,11 @@ var ReactStreetview = (function (_React$Component) {
 
         if (!event || event == 'center')
         {
-
-                var map    = _this.map.getDiv();
-                console.log(map);
-
-                var    matrix = (_this.map.drag.style.transform || 'matrix(1,0,0,1,0,0)').split(','),
+            if(_this.map.marker && _this.map.drag) {
+                var map = _this.map.getDiv();
+                var ele = document.querySelector("#map_last .gm-style img");
+                console.log(ele.parentNode.style.left);
+                var matrix = (_this.map.drag.style.transform || 'matrix(1,0,0,1,0,0)').split(','),
                     center = {
                         width : map.clientWidth  * .5,
                         height: map.clientHeight * .5
@@ -61,11 +61,10 @@ var ReactStreetview = (function (_React$Component) {
                         top : parseInt(matrix[5]) || parseInt(_this.map.drag.style.top)
                     },
                     marker = {
-                        left: parseInt(_this.map.marker.parentNode.style.left) + $(_this.map.marker).width()  * .5,
-                        top : parseInt(_this.map.marker.parentNode.style.top ) + $(_this.map.marker).height() * .75
+                        left: parseInt(ele.parentNode.style.left) + 25 * .5,
+                        top : parseInt(ele.parentNode.style.top ) + 36 * .75
                     },
-                    width = _this.map.getDiv().parentNode.clientWidth || $(_this.config.map).width();
-                    console.log(map);
+                    width = _this.map.getDiv().parentNode.clientWidth || _this.config.map.offsetWidth;
                 //offset since start
                 marker.left += drag.left;
                 marker.top  += drag.top;
@@ -73,7 +72,9 @@ var ReactStreetview = (function (_React$Component) {
                 //distance from the center
                 marker.left -= center.width;
                 marker.top  -= center.height;
-
+                console.log(_this.map.marker, marker);
+                _this.map.marker.style.top = marker.top;
+                _this.map.marker.style.left = marker.left;
                 //we put a coeff to decide either the pixel-measured length is inside or outside the radius.
                 //as the map is giving approximations (pixels are flat, earth is not), SOME challenges are buggy.
                 //only solution found at this point is playing with "coeff" value as per challenge basis to
@@ -92,19 +93,18 @@ var ReactStreetview = (function (_React$Component) {
                 width  = 1 + (width  | 0);
 
                 var perimeter = (width * coeff) | 0;
-                    clname    = length > perimeter ? 'outside' : 'inside';
+                var clname = length > perimeter ? 'outside' : 'inside';
 
                 //console.log(length, perimeter, length > perimeter, clname);
 
                 _this.map.arrow.className = clname;
                 _this.map.arrow.style.width = width + 'px';
-
+            }
         }
 
         if (!event || event == 'position' || event == 'pov')
         {
-            console.log(_this.config.destination);
-
+            if(_this.map.marker) {
                 var angle = _this.props.googleMaps.geometry.spherical.computeHeading(
                     {lat:function() {
                         return _this.config.destination.lat
@@ -113,7 +113,7 @@ var ReactStreetview = (function (_React$Component) {
                         return _this.config.destination.lng
                     }}, _this.streetView.getPosition()
                 );
-                console.log(angle);
+
                 _this.map.arrow.style.transform                  = ('rotate(%deg)').replace('%',  (angle + 90));
                 _this.map.arrow.style.webkitTransform            = ('rotate(%deg)').replace('%',  (angle + 90));
                 _this.map.arrow.style.mozTransform               = ('rotate(%deg)').replace('%',  (angle + 90));
@@ -123,7 +123,7 @@ var ReactStreetview = (function (_React$Component) {
                 _this.map.arrow.firstChild.style.webkitTransform = ('rotate(%deg)').replace('%', -(angle + 90));
                 _this.map.arrow.firstChild.style.mozTransform    = ('rotate(%deg)').replace('%', -(angle + 90));
                 _this.map.arrow.firstChild.style.msTransform     = ('rotate(%deg)').replace('%', -(angle + 90));
-
+            }
         }
     }
 	_createClass(ReactStreetview, [{
@@ -168,10 +168,7 @@ var ReactStreetview = (function (_React$Component) {
 
                 self.config = config;
 
-                console.log(this.props.panos[record]);
-
                     self.config.destination = {lat:parseFloat(this.props.panos[record].lat),lng:parseFloat(this.props.panos[record].lng)};
-                    console.log(self.config.destination);
                     window.marker = self.map.marker = new this.props.googleMaps.Marker(
                     {
                         map       : self.map,
@@ -186,6 +183,13 @@ var ReactStreetview = (function (_React$Component) {
                         }
                     });
 
+                setTimeout(function() {
+                    self.map.drag = self.map.getDiv().firstChild.firstChild.firstChild;
+                    document.getElementById('map_last').appendChild(self.map.drag);
+                    var marker = document.querySelector('img[src*="img_flag.png"]');
+                    self.map.marker = marker;
+                }, 4000);
+
                 self.map.setStreetView(this.streetView);
                 self.map.setCenter(this.streetView.getPosition());
                 var _this = this;
@@ -196,10 +200,6 @@ var ReactStreetview = (function (_React$Component) {
                 self.map.arrow.appendChild(
                     document.createElement('span')
                 );
-                self.map.drag = document.querySelector('img[src*="img_flag.png"]');
-                console.log(self.map.drag);
-                var marker = document.querySelector('img[src*="img_flag.png"]');
-                self.map.marker = marker;
 
                 //var _this = this;
 				this.streetView.addListener('position_changed', function () {
@@ -209,9 +209,6 @@ var ReactStreetview = (function (_React$Component) {
 						_this.props.onPositionChanged(_this.streetView.getPosition());
 					}
 				});
-
-
-
 
                 this.streetView.addListener('pano_changed', function () {
                     update('center',_this);
@@ -271,7 +268,6 @@ ReactStreetview.propTypes = {
 	streetViewPanoramaOptions: _react2['default'].PropTypes.object.isRequired,
 	onPositionChanged: _react2['default'].PropTypes.func,
 	onPovChanged: _react2['default'].PropTypes.func,
-	onPositionChanged: _react2['default'].PropTypes.func,
     onPanoChanged: _react2['default'].PropTypes.func
 };
 
