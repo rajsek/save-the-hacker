@@ -46,6 +46,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        console.log('home');
         initScene();
         var scene = getScene();
         var renderer = getRenderer();
