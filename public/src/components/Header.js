@@ -17,7 +17,7 @@ class Header extends Component {
                 <a className="appLogo" title="Explore the world">Explore the world</a>
                 <div className="gameStatus">
                     <small>Challanges Completed</small>
-                    <strong>1/15</strong>
+                    <strong>{this.props.nb_finished}/15</strong>
                 </div>
             </header>
         );
@@ -25,7 +25,9 @@ class Header extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+    const nb_finished = state.getIn(['home', 'nb_finished']);
     return {
+        nb_finished: nb_finished
     }
 }
 //This all fuzzz is because we need injecting react-intl

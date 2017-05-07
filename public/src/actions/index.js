@@ -198,7 +198,6 @@ export function loadMapMarkers(continent) {
     for (var i in Places)
         if (i == continent) {
             for (var val in Places[i]) {
-                console.log(val);
                 markers.push({
                     lat: parseFloat(Places[i][val].lat),
                     lng: parseFloat(Places[i][val].lng),
@@ -208,7 +207,6 @@ export function loadMapMarkers(continent) {
                     show: false
                 });
             }
-
         };
     return dispatch => {
         dispatch({

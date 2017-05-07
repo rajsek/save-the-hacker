@@ -230,7 +230,7 @@ class Maps extends Component {
                                 lng: val.get('lng')
                             }}
                             icon={{
-                                url: iconUrl
+                                url: val.get('type') == 'picture' ? icon_camera : (val.get('type') == 'map' ? icon_locate : icon_time)
                             }}
                             onClick={() => {
                                 this.showInfoWIndow(val.get('id'));

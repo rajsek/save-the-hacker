@@ -27,7 +27,6 @@ export default function (state = fromJS({data: {}, distance: 100}), action) {
                 load:1
             });
         case MAKE_WIN:
-            console.log(true);
             return getNewState(state, {
                 win:true,
                 load:1

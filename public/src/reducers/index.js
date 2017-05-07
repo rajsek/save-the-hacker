@@ -11,7 +11,7 @@ function getNewState(state, newState) {
     return state.merge(newState);
 }
 
-export default function (state = fromJS({locale: locale}), action) {
+export default function (state = fromJS({locale: locale, nb_finished: 0}), action) {
     switch (action.type) {
         case LOCALE_CHANGE:
             return getNewState(state, {locale: action.locale});
