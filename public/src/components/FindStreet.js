@@ -31,6 +31,13 @@ class Maps extends Component {
         this
             .props
             .getStreetViewPlace(this.props.params.id);
+<<<<<<< HEAD
+=======
+            console.log(this.props.streetData);
+
+        console.log(this.props);
+
+>>>>>>> 3529059c8c9e7b87a7d78474fdb2bec9e8d08aab
     }
     componentWillReceiveProps(nexProps) {
 
@@ -97,18 +104,45 @@ class Maps extends Component {
                             streetViewPanoramaOptions={streetViewPanoramaOptions}
                             onPovChanged={pov => this.props.loadPov(pov)}/>
                     </div>
-                    <div>
-                        {this.props.streetData.title}
-                        <span onClick={
+                    <div className="challangeInfo ciCamera">
+                        <figure></figure>
+                        <h3><span>Take a picture at Taj Mahal</span></h3>
+                    </div>
+                    <div className="gameProgress">
+                        <button className="btnCapture disabled" onClick={
                                     () => {
                                         this.checkPlaceisRight();
                                     }
-                        }> Click Here</span>
+                        }><i className="iconCamera"></i> <span>Click Here</span></button>
                     </div>
-                    {(this.props.streetData.win) ? <div>You won</div>
-                        : ((this.props.streetData.load) ? <div>Try Again</div> : <div></div>)}
                 </div>
                 <Header />
+                <div className="infoBlock">
+                    <button title="Info"></button>
+                    <div className="infoBox">
+                        <a className="close">&times;</a>
+                        <p>Surf around map and reach the mentioned destination. Once you reached the capture button will be enabled. Then take picture !!</p>
+                    </div>
+                </div>
+
+                <div className="popup dialogResult hide" id="result_popup" role="dialog">
+                    <div className="popupOverlay"></div>
+                    <div className="popupContent">
+                        <a className="close" title="close">&times;</a>
+                        <main>
+                            {(this.props.streetData.win) ?
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                            : ((this.props.streetData.load) ?
+                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+                            : <div></div>)}
+                        </main>
+                        <div className="actions">
+                            <a role="button" className="btnGlobe"><i></i> <span>Goto Globe</span></a>
+                            <a role="button" className="btnContinet"><i></i> <span>Goto Continent</span></a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         );
     }

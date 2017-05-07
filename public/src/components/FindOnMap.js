@@ -48,22 +48,22 @@ class FindOnMap extends Component {
     render() {
         const { formatMessage } = this.props.intl;
         console.log(this.props.mapData);
-        var styles = {style:        [
+        var styles = [
             {
-                "featureType": "water",
+                "featureType": "administrative",
                 "elementType": "geometry",
                 "stylers": [
                     {
-                        "color": "#a2daf2"
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType": "landscape.man_made",
-                "elementType": "geometry",
+                "featureType": "administrative.land_parcel",
+                "elementType": "labels",
                 "stylers": [
                     {
-                        "color": "#f7f1df"
+                        "visibility": "off"
                     }
                 ]
             },
@@ -72,31 +72,12 @@ class FindOnMap extends Component {
                 "elementType": "geometry",
                 "stylers": [
                     {
-                        "color": "#d0e3b4"
-                    }
-                ]
-            },
-            {
-                "featureType": "landscape.natural.terrain",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.park",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#bde6ab"
+                        "color": "#a1e262"
                     }
                 ]
             },
             {
                 "featureType": "poi",
-                "elementType": "labels",
                 "stylers": [
                     {
                         "visibility": "off"
@@ -104,16 +85,8 @@ class FindOnMap extends Component {
                 ]
             },
             {
-                "featureType": "poi.medical",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#fbd3da"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.business",
+                "featureType": "poi",
+                "elementType": "labels.text",
                 "stylers": [
                     {
                         "visibility": "off"
@@ -122,68 +95,53 @@ class FindOnMap extends Component {
             },
             {
                 "featureType": "road",
-                "elementType": "geometry.stroke",
+                "elementType": "labels.icon",
                 "stylers": [
                     {
                         "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "labels",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.highway",
-                "elementType": "geometry.fill",
-                "stylers": [
-                    {
-                        "color": "#ffe15f"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.highway",
-                "elementType": "geometry.stroke",
-                "stylers": [
-                    {
-                        "color": "#efd151"
                     }
                 ]
             },
             {
                 "featureType": "road.arterial",
-                "elementType": "geometry.fill",
+                "elementType": "labels",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry.stroke",
                 "stylers": [
                     {
                         "color": "#ffffff"
+                    },
+                    {
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType": "road.local",
-                "elementType": "geometry.fill",
+                "featureType": "road.highway",
+                "elementType": "labels",
                 "stylers": [
                     {
-                        "color": "black"
+                        "visibility": "off"
                     }
                 ]
             },
             {
-                "featureType": "transit.station.airport",
+                "featureType": "water",
                 "elementType": "geometry.fill",
                 "stylers": [
                     {
-                        "color": "#cfb2db"
+                        "color": "#2293df"
                     }
                 ]
             }
-        ]};
+        ];
         return (
             <div className="page mapPage findMap">
                 <div className="map">
@@ -205,6 +163,7 @@ class FindOnMap extends Component {
                             zoomControlOptions: {
                                 position: maps.ControlPosition.LEFT_CENTER
                             },
+                            styles: styles,
                             keyboardShortcuts: true,
                             panControl: true,
                             panControlOptions: {
@@ -257,17 +216,37 @@ class FindOnMap extends Component {
                         </Marker>)}
 
                     </Map>
-                    <span>{this.props.mapData.question}
-                        ?
-                        <br /></span>
-                    <span>{(this.props.mapData.clicked <= 0)
-                        ? 'You Lost'
-                        : ((this.props.mapData.won)
-                            ? 'You Won'
-                            : 'You have ' + this.props.mapData.clicked + 'chance to play')}
-                    </span>
+                    <div className="challangeInfo ciLocate">
+                        <figure></figure>
+                        <h3><span>{this.props.mapData.question} ?</span></h3>
+                    </div>
                 </div>
                 <Header />
+                <div className="infoBlock">
+                    <button title="Info"></button>
+                    <div className="infoBox">
+                        <a className="close">&times;</a>
+                        <p>Surf around map and reach the mentioned destination. Once you reached there, click on the location !!</p>
+                    </div>
+                </div>
+
+                <div className="popup dialogResult hide" id="result_popup" role="dialog">
+                    <div className="popupOverlay"></div>
+                    <div className="popupContent">
+                        <a className="close" title="close">&times;</a>
+                        <main>
+                            {(this.props.mapData.clicked <= 0) ?
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                            : ((this.props.mapData.won) ?
+                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+                            : <p>'You have ' + this.props.mapData.clicked + 'chance to play'</p>)}
+                        </main>
+                        <div className="actions">
+                            <a role="button" className="btnGlobe"><i></i> <span>Goto Globe</span></a>
+                            <a role="button" className="btnContinet"><i></i> <span>Goto Continent</span></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

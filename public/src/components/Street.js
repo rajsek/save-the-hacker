@@ -91,6 +91,31 @@ class Maps extends Component {
                         : <div>You Lost</div>}
                 </div>
                 <Header />
+                <div className="infoBlock">
+                    <button title="Info"></button>
+                    <div className="infoBox">
+                        <a className="close">&times;</a>
+                        <p>Surf around map and reach the mentioned destination. Once you reached there, click on the location !!</p>
+                    </div>
+                </div>
+
+                <div className="popup dialogResult hide" id="result_popup" role="dialog">
+                    <div className="popupOverlay"></div>
+                    <div className="popupContent">
+                        <a className="close" title="close">&times;</a>
+                        <main>
+                            {(this.props.streetData.time > 0 && this.props.streetData.distance < 50) ?
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                            :
+                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+                            }
+                        </main>
+                        <div className="actions">
+                            <a role="button" className="btnGlobe"><i></i> <span>Goto Globe</span></a>
+                            <a role="button" className="btnContinet"><i></i> <span>Goto Continent</span></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
