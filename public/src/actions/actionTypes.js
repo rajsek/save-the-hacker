@@ -18,3 +18,5 @@ export const MAKE_LOSS = 'MAKE_LOSS';
 export const LOAD_PANO = 'LOAD_PANO';
 export const SAVE_USER = 'SAVE_USER';
 export const SAVE_CHALLENGE = 'SAVE_CHALLENGE';
+export const MAKE_ENABLED = 'MAKE_ENABLED';
+export const MAKE_DISABLED = 'MAKE_DISABLED';

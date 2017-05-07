@@ -36,6 +36,20 @@ class Maps extends Component {
 
 
     }
+    checkPlaceSatisfied() {
+        var id = 0;
+        console.log(this.props.streetData.pano);
+        this.props.streetData.porno.map((val) => {
+            if(val.id == this.props.streetData.pano) {
+                id = 1;
+                return this.props.enableCamera();
+            }
+        });
+        if(id == 0) {
+            return this.props.disableCamera();
+        }
+
+    }
     checkPlaceisRight() {
         var id = 0;
         this.props.streetData.porno.map((val) => {
@@ -79,34 +93,41 @@ class Maps extends Component {
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
 
         const streetViewPanoramaOptions = this.props.streetData.data;
+        var hide = (this.props.streetData.win || this.props.streetData.failed) ? '' : 'hide';
         return (
             <div className="page mapPage streetView">
                 <div className="map">
                     <div>
                         <ReactStreetview
                             onPanoChanged={position => {
-                                this.props.loadPano(position)
+                                this.props.loadPano(position);
+                                this.checkPlaceSatisfied();
                         }}
                             onPositionChanged={position => {
                                 this.props.loadPosition(position)
+                                this.checkPlaceSatisfied();
                         }}
 
                             panos={this.props.streetData.porno}
                             onLocationChanged={data => {}}
                             apiKey={googleMapsApiKey}
                             streetViewPanoramaOptions={streetViewPanoramaOptions}
-                            onPovChanged={pov => this.props.loadPov(pov)}/>
+                            onPovChanged={pov => { this.props.loadPov(pov); this.checkPlaceSatisfied(); }}/>
                     </div>
                     <div className="challangeInfo ciCamera">
                         <figure></figure>
-                        <h3><span>Take a picture at Taj Mahal</span></h3>
+                        <h3><span>Take a picture {this.props.streetData.title}</span></h3>
                     </div>
                     <div className="gameProgress">
-                        <button className="btnCapture disabled" onClick={
+                        {(this.props.streetData.enabled) ? <button className="btnCapture" onClick={
                                     () => {
                                         this.checkPlaceisRight();
                                     }
-                        }><i className="iconCamera"></i> <span>Click Here</span></button>
+                        }><i className="iconCamera"></i> <span>Capture</span></button> : <button className="btnCapture disabled" onClick={
+                                    () => {
+
+                                    }
+                        }><i className="iconCamera"></i> <span>Capture</span></button>}
                     </div>
                 </div>
                 <Header />
@@ -118,14 +139,14 @@ class Maps extends Component {
                     </div>
                 </div>
 
-                <div className="popup dialogResult hide" id="result_popup" role="dialog">
+                <div className={`popup dialogResult ${hide}`} id="result_popup" role="dialog">
                     <div className="popupOverlay"></div>
                     <div className="popupContent">
                         <a className="close" title="close">&times;</a>
                         <main>
                             {(this.props.streetData.win) ?
                                 <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
-                            : ((this.props.streetData.load) ?
+                            : ((this.props.streetData.failed) ?
                                 <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
                             : <div></div>)}
                         </main>
