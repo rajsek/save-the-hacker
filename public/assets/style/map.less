@@ -184,12 +184,6 @@
             width: 1.8em;
             height: 1.8em;
             margin: .9em auto;
-            .icTime & {
-                background-image: url('@{imgPath}/map/icon-time.png');
-            }
-            .icLocate & {
-                background-image: url('@{imgPath}/map/icon-locate.png');
-            }
         }
     }
     h3 {
@@ -211,6 +205,12 @@
             display: inline-block;
             vertical-align: middle;
         }
+    }
+    &.ciTime figure:before {
+        background-image: url('@{imgPath}/map/icon-time.png');
+    }
+    &.icLocate figure:before {
+        background-image: url('@{imgPath}/map/icon-locate.png');
     }
 }
 
@@ -311,5 +311,33 @@
         top: 14px;
         right: 14px;
         text-align: center;
+    }
+}
+
+.timer {
+    background: #fff;
+    padding: 14px;
+    border-radius: 16px 0 16px;
+    h4 {
+        font-size: 1.1em;
+        margin-bottom: 0.3em;
+    }
+    .clock {
+        display: table;
+        margin: 0 auto;
+        >div {
+            display: table-cell;
+            padding: 4px;
+        }
+        small {
+            display: block;
+        }
+        span {
+            display: inline-block;
+            background: #e4442d;
+            color: #fff;
+            padding: 7px;
+            width: 20px;
+        }
     }
 }
