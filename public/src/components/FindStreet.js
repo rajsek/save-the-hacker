@@ -100,9 +100,8 @@ class Maps extends Component {
     render() {
         const {formatMessage} = this.props.intl;
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
-
-        const streetViewPanoramaOptions = this.props.streetData.data;
         var hide = (this.props.streetData.win || this.props.streetData.failed) ? '' : 'hide';
+        const streetViewPanoramaOptions = this.props.streetData.data;
         return (
             <div className="page mapPage streetView">
                 <div className="map">
@@ -113,7 +112,7 @@ class Maps extends Component {
                                 this.checkPlaceSatisfied();
                         }}
                             onPositionChanged={position => {
-                                this.props.loadPosition(position)
+                                this.props.loadPosition(position);
                                 this.checkPlaceSatisfied();
                         }}
 
@@ -121,11 +120,12 @@ class Maps extends Component {
                             onLocationChanged={data => {}}
                             apiKey={googleMapsApiKey}
                             streetViewPanoramaOptions={streetViewPanoramaOptions}
-                            onPovChanged={pov => { this.props.loadPov(pov); this.checkPlaceSatisfied(); }}/>
+                            onPovChanged={pov => { this.props.loadPov(pov);
+                            this.checkPlaceSatisfied();}}/>
                     </div>
                     <div className="challangeInfo ciCamera">
                         <figure></figure>
-                        <h3><span>Take a picture {this.props.streetData.title}</span></h3>
+                        <h3><span>Take a picture at Taj Mahal</span></h3>
                     </div>
                     <div className="gameProgress">
                         {(this.props.streetData.enabled) ? <button className="btnCapture" onClick={
@@ -151,11 +151,11 @@ class Maps extends Component {
                 <div className={`popup dialogResult ${hide}`} id="result_popup" role="dialog">
                     <div className="popupOverlay"></div>
                     <div className="popupContent">
-                        <a className="close" title="close">&times;</a>
+                        <a className="close" title="close" onClick={this.goToGlobe.bind(this)}>&times;</a>
                         <main>
                             {(this.props.streetData.win) ?
                                 <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
-                            : ((this.props.streetData.failed) ?
+                            : ((this.props.streetData.load) ?
                                 <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
                             : <div></div>)}
                         </main>
