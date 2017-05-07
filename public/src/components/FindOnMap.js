@@ -252,10 +252,10 @@ class FindOnMap extends Component {
                         <a className="close" title="close">&times;</a>
                         <main>
                             {(this.props.mapData.clicked <= 0) ?
-                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. Try again with below options</p></div>
 
                             : ((this.props.mapData.won) ?
-                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. Try again with below options</p></div>
                             : <p>'You have won the Challenge'</p>)}
                         </main>
                         <div className="actions">

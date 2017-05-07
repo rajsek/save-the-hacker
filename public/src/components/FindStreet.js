@@ -198,9 +198,9 @@ class Maps extends Component {
                         <a className="close" title="close" onClick={this.goToGlobe.bind(this)}>&times;</a>
                         <main>
                             {(this.props.streetData.win) ?
-                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. Try again with below options</p></div>
                             : ((this.props.streetData.load) ?
-                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. Try again with below options</p></div>
                             : <div></div>)}
                         </main>
                         <div className="actions">
