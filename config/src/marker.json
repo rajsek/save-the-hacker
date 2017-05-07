@@ -59,7 +59,7 @@
    "Continent": "Africa",
    "Name": "Kruger National Path",
    "Type": "Map",
-   "Data": "{start: {lat: \"-23.24716834298397\", lng: \"26.215649218750077\"}, zoom: 6}",
+   "Data": "{start: {lat: \"-23.24716834298397\", lng: \"26.215649218750077\"}, zoom: 8}",
    "Objective": "{lat: \"-24.092373975858866\", lng: \"31.782970996093827\"} "
  },
  {
