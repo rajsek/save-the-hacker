@@ -46,6 +46,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        console.log('home');
         initScene();
         var scene = getScene();
         var renderer = getRenderer();
@@ -207,7 +208,7 @@ class Home extends Component {
             }
 
             setEvents(camera, [baseGlobe], 'click');
-            //setEvents(camera, [baseGlobe], 'mousemove', 10);
+            setEvents(camera, [baseGlobe], 'mousemove', 10);
         });
 
         function animate() {
@@ -215,6 +216,7 @@ class Home extends Component {
             renderer.clear();
             controls.update();
             renderer.render(scene, camera);
+
         }
         animate();
 
