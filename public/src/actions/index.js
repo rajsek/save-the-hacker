@@ -16,7 +16,9 @@ import {
     MAKE_LOSS,
     LOAD_PANO,
     SAVE_USER,
-    SAVE_CHALLENGE
+    SAVE_CHALLENGE,
+    MAKE_ENABLED,
+    MAKE_DISABLED
 } from './actionTypes';
 import markerJson from '../../../config/src/marker.json';
 import Places from '../libraries/places';
@@ -72,6 +74,16 @@ export const Selected = () => {
 export const Failed = () => {
     return dispatch => {
         dispatch({ type: FAILED });
+    };
+}
+export const enableCamera = () => {
+    return dispatch => {
+        dispatch({ type: MAKE_ENABLED });
+    };
+}
+export const disableCamera = () => {
+    return dispatch => {
+        dispatch({ type: MAKE_DISABLED });
     };
 }
 export const LoadQuestion = (id) => {
