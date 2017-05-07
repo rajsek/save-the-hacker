@@ -1,10 +1,10 @@
-import {POV_CHANGE, FIND_STREET_VIEW, LOAD_POV, LOAD_POSITION, MAKE_WIN, MAKE_LOSS, LOAD_PANO, MAKE_DISABLED, MAKE_ENABLED} from '../actions/actionTypes';
+import {POV_CHANGE, FIND_STREET_VIEW, LOAD_POV, LOAD_POSITION, MAKE_WIN, MAKE_LOSS, LOAD_PANO, MAKE_DISABLED, MAKE_ENABLED,SHOW_FRAME, HIDE_FRAME} from '../actions/actionTypes';
 
 import {fromJS, Map} from 'immutable';
 function getNewState(state, newState) {
     return state.merge(newState);
 }
-export default function (state = fromJS({data: {}, distance: 100}), action) {
+export default function (state = fromJS({data: {}, porno:[], frame:false, distance: 100}), action) {
     switch (action.type) {
         case POV_CHANGE:
             return getNewState(state, {distance: action.distance});
@@ -20,6 +20,7 @@ export default function (state = fromJS({data: {}, distance: 100}), action) {
                 heading:72,
                 pitch:0,
                 win:false,
+                frame:false,
                 failed:false,
                 load:0
             });
@@ -39,6 +40,16 @@ export default function (state = fromJS({data: {}, distance: 100}), action) {
                 failed:true,
                 load:1
             });
+        case SHOW_FRAME:{
+            return getNewState(state, {
+                frame:true
+            });
+        }
+        case HIDE_FRAME:{
+            return getNewState(state, {
+                frame:false
+            });
+        }
         case MAKE_WIN:
             return getNewState(state, {
                 win:true,

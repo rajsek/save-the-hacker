@@ -20,3 +20,5 @@ export const SAVE_USER = 'SAVE_USER';
 export const SAVE_CHALLENGE = 'SAVE_CHALLENGE';
 export const MAKE_ENABLED = 'MAKE_ENABLED';
 export const MAKE_DISABLED = 'MAKE_DISABLED';
+export const SHOW_FRAME = 'SHOW_FRAME';
+export const HIDE_FRAME = 'HIDE_FRAME';
