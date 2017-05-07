@@ -5,6 +5,7 @@ import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
 import conf from '../conf';
 import Header from './Header';
+import { browserHistory } from 'react-router';
 import {
     Map,
     KmlLayer,
@@ -120,10 +121,10 @@ class Maps extends Component {
                     </div>
                 </div>
 
-                <div className={ this.props.streetData.time <= 0 || this.props.streetData.distance < 50 ? 'popup dialogResult hide' : 'popup dialogResult' } id="result_popup" role="dialog">
+                <div className={ this.props.streetData.time <= 0 || this.props.streetData.distance < 50 ? 'popup dialogResult ' : 'popup dialogResult hide' } id="result_popup" role="dialog">
                     <div className="popupOverlay"></div>
                     <div className="popupContent">
-                        <a className="close" title="close">&times;</a>
+                        <a className="close" title="close" onClick={this.goToGlobe.bind(this)}>&times;</a>
                         <main>
                             {(this.props.streetData.time > 0 && this.props.streetData.distance < 50) ?
                                 <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>

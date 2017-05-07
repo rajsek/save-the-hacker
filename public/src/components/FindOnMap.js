@@ -238,15 +238,16 @@ class FindOnMap extends Component {
                     </div>
                 </div>
 
-                <div className={ this.props.mapData.won || this.props.mapData.clicked >= 3 ? 'popup dialogResult hide' : 'popup dialogResult' } id="result_popup" role="dialog">
+                <div className={(this.props.mapData.won || this.props.mapData.clicked <= 0) ? 'popup dialogResult ' : 'popup dialogResult hide' } id="result_popup" role="dialog">
                     <div className="popupOverlay"></div>
                     <div className="popupContent">
                         <a className="close" title="close">&times;</a>
                         <main>
                             {(this.props.mapData.clicked <= 0) ?
-                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
-                            : ((this.props.mapData.won) ?
                                 <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+
+                            : ((this.props.mapData.won) ?
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
                             : <p>'You have won the Challenge'</p>)}
                         </main>
                         <div className="actions">
