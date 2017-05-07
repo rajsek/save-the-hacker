@@ -35,97 +35,7 @@ var ReactStreetview = (function (_React$Component) {
 		_get(Object.getPrototypeOf(ReactStreetview.prototype), 'constructor', this).call(this);
 		this.streetView = null;
 	}
-    var update = (event, _this) =>
-    {
-        var i = i || 0;
 
-        //tricky coeff checker depending on platform (i know that ternary sound odd, but u'll thank me when u'll need to change those values.)
-        var coeff = .48;
-
-        if (!event || event == 'position')
-            _this.map.setCenter(_this.streetView.getPosition());
-
-        if (!event || event == 'center')
-        {
-            if(_this.map.marker && _this.map.drag) {
-                var map = _this.map.getDiv();
-                var ele = document.querySelector("#map_last .gm-style img");
-                console.log(ele.parentNode.style.left);
-                var matrix = (_this.map.drag.style.transform || 'matrix(1,0,0,1,0,0)').split(','),
-                    center = {
-                        width : map.clientWidth  * .5,
-                        height: map.clientHeight * .5
-                    },
-                    drag   = {
-                        left: parseInt(matrix[4]) || parseInt(_this.map.drag.style.left),
-                        top : parseInt(matrix[5]) || parseInt(_this.map.drag.style.top)
-                    },
-                    marker = {
-                        left: parseInt(ele.parentNode.style.left) + 25 * .5,
-                        top : parseInt(ele.parentNode.style.top ) + 36 * .75
-                    },
-                    width = _this.map.getDiv().parentNode.clientWidth || _this.config.map.offsetWidth;
-                //offset since start
-                marker.left += drag.left;
-                marker.top  += drag.top;
-
-                //distance from the center
-                marker.left -= center.width;
-                marker.top  -= center.height;
-                console.log(_this.map.marker, marker);
-                _this.map.marker.style.top = marker.top;
-                _this.map.marker.style.left = marker.left;
-                //we put a coeff to decide either the pixel-measured length is inside or outside the radius.
-                //as the map is giving approximations (pixels are flat, earth is not), SOME challenges are buggy.
-                //only solution found at this point is playing with "coeff" value as per challenge basis to
-                //adapt and correct
-
-                /*console.log('===');
-                console.log('width', width);
-                console.log('coeff', coeff);*/
-
-                var length = Math.sqrt(marker.left * marker.left + marker.top * marker.top);
-
-                /*console.log('length', length);
-                console.log('---');*/
-
-                length = 0 + (length | 0);
-                width  = 1 + (width  | 0);
-
-                var perimeter = (width * coeff) | 0;
-                var clname = length > perimeter ? 'outside' : 'inside';
-
-                //console.log(length, perimeter, length > perimeter, clname);
-
-                _this.map.arrow.className = clname;
-                _this.map.arrow.style.width = width + 'px';
-            }
-        }
-
-        if (!event || event == 'position' || event == 'pov')
-        {
-            if(_this.map.marker) {
-                var angle = _this.props.googleMaps.geometry.spherical.computeHeading(
-                    {lat:function() {
-                        return _this.config.destination.lat
-                    },
-                    lng:function () {
-                        return _this.config.destination.lng
-                    }}, _this.streetView.getPosition()
-                );
-
-                _this.map.arrow.style.transform                  = ('rotate(%deg)').replace('%',  (angle + 90));
-                _this.map.arrow.style.webkitTransform            = ('rotate(%deg)').replace('%',  (angle + 90));
-                _this.map.arrow.style.mozTransform               = ('rotate(%deg)').replace('%',  (angle + 90));
-                _this.map.arrow.style.msTransform                = ('rotate(%deg)').replace('%',  (angle + 90));
-
-                _this.map.arrow.firstChild.style.transform       = ('rotate(%deg)').replace('%', -(angle + 90));
-                _this.map.arrow.firstChild.style.webkitTransform = ('rotate(%deg)').replace('%', -(angle + 90));
-                _this.map.arrow.firstChild.style.mozTransform    = ('rotate(%deg)').replace('%', -(angle + 90));
-                _this.map.arrow.firstChild.style.msTransform     = ('rotate(%deg)').replace('%', -(angle + 90));
-            }
-        }
-    }
 	_createClass(ReactStreetview, [{
 		key: 'initialize',
 		value: function initialize(canvas) {
@@ -193,17 +103,10 @@ var ReactStreetview = (function (_React$Component) {
                 self.map.setStreetView(this.streetView);
                 self.map.setCenter(this.streetView.getPosition());
                 var _this = this;
-                self.map.arrow = document.getElementById('map_last').appendChild(
-                    document.createElement('span')
-                );
 
-                self.map.arrow.appendChild(
-                    document.createElement('span')
-                );
 
                 //var _this = this;
 				this.streetView.addListener('position_changed', function () {
-                    update('position',_this);
                     self.map.setCenter(_this.streetView.getPosition());
 					if (_this.props.onPositionChanged) {
 						_this.props.onPositionChanged(_this.streetView.getPosition());
@@ -211,7 +114,6 @@ var ReactStreetview = (function (_React$Component) {
 				});
 
                 this.streetView.addListener('pano_changed', function () {
-                    update('center',_this);
                     self.map.setCenter(_this.streetView.getPosition());
 					if (_this.props.onPositionChanged) {
 						_this.props.onPanoChanged(_this.streetView.getPano());
@@ -219,7 +121,6 @@ var ReactStreetview = (function (_React$Component) {
 				});
 
 				this.streetView.addListener('pov_changed', function () {
-                    update('pov',_this);
                     self.map.setCenter(_this.streetView.getPosition());
 					if (_this.props.onPovChanged) {
 						_this.props.onPovChanged(_this.streetView.getPov());
