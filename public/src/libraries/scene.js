@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import TrackballControls from 'three-trackballcontrols';
+//import TrackballControls from 'three-trackballcontrols';
+import TrackballControls from './trackball';
 import d3 from 'd3';
 
 var canvas, renderer, camera, scene, light, controls;
