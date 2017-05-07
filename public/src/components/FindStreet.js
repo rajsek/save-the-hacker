@@ -118,7 +118,6 @@ class Maps extends Component {
                     <div className="popupContent">
                         <a className="close" title="close">&times;</a>
                         <main>
-                            <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
                             {(this.props.streetData.win) ?
                                 <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
                             : ((this.props.streetData.load) ?
