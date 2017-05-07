@@ -383,3 +383,35 @@
         }
     }
 }
+
+.pictureFrame {
+    background-image: url('@{imgPath}/img-frame.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    animation: captured 0.5s;
+    //animation-fill-mode: forwards;
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+    left: 10%;
+    right: 10%;
+    bottom: 10%;
+    top: 10%;
+    &.captured {
+        animation: captured 1s;
+        animation-fill-mode: forwards;
+        display: block;
+    }
+}
+@keyframes captured {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.4;
+        transform: scale(0.9);
+    }
+}

@@ -110,6 +110,7 @@ class Maps extends Component {
                         <figure></figure>
                         <h3><span>Take a picture at Taj Mahal</span></h3>
                     </div>
+                    <div className="pictureFrame hide"></div>
                     <div className="gameProgress">
                         <button className="btnCapture disabled" onClick={
                                     () => {
