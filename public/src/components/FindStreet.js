@@ -123,6 +123,14 @@ class Maps extends Component {
         }
     }
 
+    showInfoBox(){
+        document.querySelector('.infoBox').style.display = 'block';
+    }
+
+    hideInfoBox(){
+        document.querySelector('.infoBox').style.display = 'none';
+    }
+
     goToGlobe(){
         browserHistory.push('/home');
     }
@@ -177,9 +185,9 @@ class Maps extends Component {
                 </div>
                 <Header />
                 <div className="infoBlock">
-                    <button title="Info"></button>
+                    <button title="Info" onClick={this.showInfoBox.bind(this)}></button>
                     <div className="infoBox">
-                        <a className="close">&times;</a>
+                        <a className="close" onClick={this.hideInfoBox.bind(this)}>&times;</a>
                         <p>Surf around map and reach the mentioned destination. Once you reached the capture button will be enabled. Then take picture !!</p>
                     </div>
                 </div>

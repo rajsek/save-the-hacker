@@ -32,6 +32,9 @@
     height: 500px;
     position: relative;
 }
+a, button {
+    cursor: pointer;
+}
 #map_last {
 	-webkit-mask: url('@{imgPath}/circle_mask.png');
 	mask: url('@{imgPath}/circle_mask.png');
@@ -364,4 +367,31 @@ header {
 	    animation: scaleOut 0.15s;
         animation-fill-mode: forwards;
 	}
+}
+
+@media only screen and (max-width: 900px) {
+    body {
+        font-size: 14px;
+    }
+}
+@media only screen and (max-width: 600px) {
+    body {
+        font-size: 12px;
+    }
+    .appLogo {
+        left: 50%;
+        height: 7em;
+        width: 7em;
+        margin-left: -3.5em;
+    }
+    div.challangeInfo {
+        top: 8.4em;
+    }
+    div#map_last {
+        bottom: 7em;
+        right: 0.6em;
+    }
+    div.popupContent {
+        width: 20em;
+    }
 }
