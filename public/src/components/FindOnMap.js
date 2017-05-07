@@ -45,6 +45,15 @@ class FindOnMap extends Component {
             .props
             .changeInfoWIndow(id);
     }
+
+    goToGlobe(){
+        browserHistory.push('/home');
+    }
+
+    goToContinent(){
+        browserHistory.goBack();
+    }
+
     render() {
         const { formatMessage } = this.props.intl;
         console.log(this.props.mapData);
@@ -165,7 +174,6 @@ class FindOnMap extends Component {
                             },
                             styles: styles,
                             keyboardShortcuts: true,
-                            panControl: true,
                             panControlOptions: {
                                 position: maps.ControlPosition.BOTTOM_RIGHT
                             },
@@ -242,8 +250,8 @@ class FindOnMap extends Component {
                             : <p>'You have ' + this.props.mapData.clicked + 'chance to play'</p>)}
                         </main>
                         <div className="actions">
-                            <a role="button" className="btnGlobe"><i></i> <span>Goto Globe</span></a>
-                            <a role="button" className="btnContinet"><i></i> <span>Goto Continent</span></a>
+                            <a role="button" className="btnGlobe" onClick={this.goToGlobe.bind(this)}><i></i> <span>Goto Globe</span></a>
+                            <a role="button" className="btnContinet" onClick={this.goToContinent.bind(this)}><i></i> <span>Goto Continent</span></a>
                         </div>
                     </div>
                 </div>

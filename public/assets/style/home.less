@@ -51,6 +51,20 @@
             text-shadow: 0 0 5px rgba(0,0,0,0.5);
         }
     }
+    &:before {
+        content: '';
+        background-image: url('@{imgPath}/img-travel-foot.png');
+        background-position: bottom center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        bottom:0;
+        height: 0;
+        width: 60%;
+        left: 20%;
+        padding-bottom: 25%;
+        opacity: 0.25;
+    }
 }
 .loadingLogo {
     figure {
@@ -231,9 +245,32 @@
     }
 }
 
-.fbButton   {
+div.socialConnect {
     position: absolute;
-    top: 50%;
-    left: 50%;
-
+    bottom: 2em;
+    right: 1.7em;
+    text-align: right;
+    small {
+        display: block;
+        color: #fff;
+        width: 11em;
+        font-size: 0.9em;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.2em;
+    }
+}
+.fbButton {
+    display: inline-block;
+    background-image: url('@{imgPath}/fb-button.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: 0 none;
+    cursor: pointer;
+    width: 10em;
+    height: 2.3em;
+    text-indent: -999em;
+    &:hover {
+        opacity: 0.9;
+    }
 }

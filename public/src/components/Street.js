@@ -58,6 +58,15 @@ class Maps extends Component {
     deg2rad(deg) {
         return deg * (Math.PI / 180)
     }
+
+    goToGlobe(){
+        browserHistory.push('/home');
+    }
+
+    goToContinent(){
+        browserHistory.goBack();
+    }
+
     render() {
         const {formatMessage} = this.props.intl;
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
@@ -76,21 +85,33 @@ class Maps extends Component {
                         streetViewPanoramaOptions={streetViewPanoramaOptions}
                         onPovChanged={pov => console.log(pov)}/>
 
-                    <div>
-                    {parseInt(this.props.streetData.time / 60)}
-                        M : {this.props.streetData.time % 60}
-                        S
-                    </div>
-                    {(this.props.streetData.time > 0)
-                        ? ((this.props.streetData.distance > 50)
-                            ? <div>
-                                    You are {this.props.streetData.distance}
-                                    metres away
+                    <div className="gameProgress">
+                        <div className="timer">
+                            <h4>
+                            {(this.props.streetData.time > 0)
+                                ?
+                                <span> You are {this.props.streetData.distance}
+                                metres away </span> : <span></span>
+                            }
+                            </h4>
+                            <div className="clock">
+                                <div>
+                                    <small>Mins</small>
+                                    <span>{parseInt(this.props.streetData.time / 60)}</span>
+                                </div>
+                                <div>
+                                    <small>Secs</small>
+                                    <span>{this.props.streetData.time % 60}</span>
+                                </div>
                             </div>
-                            : <div>You won</div>)
-                        : <div>You Lost</div>}
+                        </div>
+                    </div>
                 </div>
                 <Header />
+                <div className="challangeInfo ciTime">
+                    <figure></figure>
+                    <h3><span>Connect place ?</span></h3>
+                </div>
                 <div className="infoBlock">
                     <button title="Info"></button>
                     <div className="infoBox">
@@ -111,8 +132,8 @@ class Maps extends Component {
                             }
                         </main>
                         <div className="actions">
-                            <a role="button" className="btnGlobe"><i></i> <span>Goto Globe</span></a>
-                            <a role="button" className="btnContinet"><i></i> <span>Goto Continent</span></a>
+                            <a role="button" className="btnGlobe" onClick={this.goToGlobe.bind(this)}><i></i> <span>Goto Globe</span></a>
+                            <a role="button" className="btnContinet" onClick={this.goToContinent.bind(this)}><i></i> <span>Goto Continent</span></a>
                         </div>
                     </div>
                 </div>
