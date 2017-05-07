@@ -68,6 +68,14 @@ class Maps extends Component {
         browserHistory.goBack();
     }
 
+    showInfoBox(){
+        document.querySelector('.infoBox').style.display = 'block';
+    }
+
+    hideInfoBox(){
+        document.querySelector('.infoBox').style.display = 'none';
+    }
+
     render() {
         const {formatMessage} = this.props.intl;
         const googleMapsApiKey = 'AIzaSyChUn8dD8m6b6S1s0owgwMe_wpBligP7mA';
@@ -114,9 +122,9 @@ class Maps extends Component {
                     <h3><span>Connect place ?</span></h3>
                 </div>
                 <div className="infoBlock">
-                    <button title="Info"></button>
+                    <button title="Info" onClick={this.showInfoBox.bind(this)}></button>
                     <div className="infoBox">
-                        <a className="close">&times;</a>
+                        <a className="close" onClick={this.hideInfoBox.bind(this)}>&times;</a>
                         <p>Surf around map and reach the mentioned destination. Once you reached there, click on the location !!</p>
                     </div>
                 </div>
