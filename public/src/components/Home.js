@@ -207,7 +207,7 @@ class Home extends Component {
             }
 
             setEvents(camera, [baseGlobe], 'click');
-            setEvents(camera, [baseGlobe], 'mousemove', 10);
+            //setEvents(camera, [baseGlobe], 'mousemove', 10);
         });
 
         function animate() {
