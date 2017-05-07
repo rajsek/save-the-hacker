@@ -103,8 +103,6 @@ class Maps extends Component {
                                     }
                         }><i className="iconCamera"></i> <span>Click Here</span></button>
                     </div>
-                    {(this.props.streetData.win) ? <div>You won</div>
-                        : ((this.props.streetData.load) ? <div>Try Again</div> : <div></div>)}
                 </div>
                 <Header />
                 <div className="infoBlock">
@@ -114,6 +112,26 @@ class Maps extends Component {
                         <p>Surf around map and reach the mentioned destination. Once you reached the capture button will be enabled. Then take picture !!</p>
                     </div>
                 </div>
+
+                <div className="popup dialogResult hide" id="result_popup" role="dialog">
+                    <div className="popupOverlay"></div>
+                    <div className="popupContent">
+                        <a className="close" title="close">&times;</a>
+                        <main>
+                            <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                            {(this.props.streetData.win) ?
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                            : ((this.props.streetData.load) ?
+                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+                            : <div></div>)}
+                        </main>
+                        <div className="actions">
+                            <a role="button" className="btnGlobe"><i></i> <span>Goto Globe</span></a>
+                            <a role="button" className="btnContinet"><i></i> <span>Goto Continent</span></a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         );
     }

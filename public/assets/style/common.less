@@ -151,6 +151,9 @@ div, header, footer, section, nav {
 .mainContainer {
     height: 100%;
 }
+.hide {
+    display: none !important;
+}
 
 /* Page */
 .page {
@@ -231,4 +234,129 @@ header {
         font-size: .9em;
         line-height: 1.2;
     }
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 41;
+    text-align: center;
+	&:before {
+		content: '';
+		display: inline-block;
+		vertical-align: middle;
+		width: 0;
+		height: 100%;
+	}
+}
+.popupOverlay {
+    animation: fadeIn 0.3s;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+    z-index: 40;
+	.out & {
+	    animation: fadeOut 0.2s;
+        animation-fill-mode: forwards;
+	}
+}
+.popupContent {
+    animation: scaleIn 0.4s;
+    background: #fff;
+    border-radius: 14px 0 14px;
+    box-shadow: 6px 6px 0 #fb4d2f;
+    color: #000;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+	width: 32em;
+    z-index: 41;
+    .close {
+        background: #000;
+        color: #fff;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        line-height: 26px;
+        display: block;
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        text-align: center;
+    }
+    main {
+        padding: 25px;
+        p {
+            margin-bottom: 0;
+        }
+    }
+    .actions {
+        background: #eee;
+        border-radius: 0 0 14px 14px;
+        padding: 14px;
+    }
+    h3 {
+        font-size: 2em;
+        margin-bottom: 0.4em;
+    }
+    .won {
+        h3 {
+            color: #2ca50f;
+        }
+    }
+    .lost {
+        h3 {
+            color: #fd0000;
+        }
+    }
+    .actions a {
+        background: #fb4d2f;
+        border-radius: 18px 0 18px;
+        border: 1px solid rgba(0,0,0,.35);
+        border-right-width: 3px;
+        border-bottom-width: 3px;
+        box-shadow: 3px 3px 0 rgba(0,0,0,.25);
+        color: #fff;
+        cursor: pointer;
+        margin: 0;
+        display: inline-block;
+        font-family: 'exo';
+        font-size: 0.9em;
+        padding: 0.5em 1.4em 0.4em;
+        margin: 0 0.7em;
+        i {
+            background-image: url('@{imgPath}/map/icon-globe.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            content: '';
+            display: inline-block;
+            width: 1.8em;
+            height: 1.8em;
+            vertical-align: middle;
+        }
+        &.btnContinet {
+            background: #d2a90c;
+            i {
+                background-image: url('@{imgPath}/map/icon-map.png');
+            }
+        }
+        span {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0.3em;
+        }
+    }
+	.out & {
+	    animation: scaleOut 0.15s;
+        animation-fill-mode: forwards;
+	}
 }
