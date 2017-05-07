@@ -125,7 +125,7 @@ class Maps extends Component {
                     <button title="Info" onClick={this.showInfoBox.bind(this)}></button>
                     <div className="infoBox">
                         <a className="close" onClick={this.hideInfoBox.bind(this)}>&times;</a>
-                        <p>Surf around map and reach the mentioned destination. Once you reached there, click on the location !!</p>
+                        <p>Surf around the map and reach the mentioned destination within given duration. Once you reached there, it will automatically freeze !!</p>
                     </div>
                 </div>
 
@@ -135,9 +135,9 @@ class Maps extends Component {
                         <a className="close" title="close" onClick={this.goToGlobe.bind(this)}>&times;</a>
                         <main>
                             {(this.props.streetData.time > 0 && this.props.streetData.distance < 50) ?
-                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
+                                <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. Try again with below options</p></div>
                             :
-                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
+                                <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. Try again with below options</p></div>
                             }
                         </main>
                         <div className="actions">
