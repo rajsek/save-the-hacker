@@ -120,7 +120,7 @@ class Maps extends Component {
                     </div>
                 </div>
 
-                <div className="popup dialogResult hide" id="result_popup" role="dialog">
+                <div className={ this.props.streetData.time <= 0 || this.props.streetData.distance < 50 ? 'popup dialogResult hide' : 'popup dialogResult' } id="result_popup" role="dialog">
                     <div className="popupOverlay"></div>
                     <div className="popupContent">
                         <a className="close" title="close">&times;</a>

@@ -5,6 +5,8 @@ import curryRight from 'lodash.curryright';
 import * as actions from '../actions';
 import conf from '../conf';
 import Header from './Header';
+import { browserHistory } from 'react-router';
+
 import {
     Map,
     KmlLayer,
@@ -35,7 +37,6 @@ class FindOnMap extends Component {
     }
     componentWillMount() { }
     componentDidMount() {
-        console.log(this.props.params.id);
         this
             .props
             .LoadQuestion(this.props.params.id);
@@ -56,7 +57,7 @@ class FindOnMap extends Component {
 
     render() {
         const { formatMessage } = this.props.intl;
-        console.log(this.props.mapData);
+
         var styles = [
             {
                 "featureType": "administrative",
@@ -182,12 +183,11 @@ class FindOnMap extends Component {
                             streetViewControl: false,
                             panControl: false,
                             disableDoubleClickZoom: true,
-                            fullscreenControl: true
+                            fullscreenControl: false
                         });
                     }}
                         onClick={(position) => {
                         if (this.props.mapData.clicked > 0) {
-                            console.log(position);
                             this.props.addNewMarker(position.latLng);
                             this
                                 .props
@@ -197,8 +197,8 @@ class FindOnMap extends Component {
 
                         <Circle
                             radius={5000}
-                            fillColor='transparent'
-                            strokeColor='transparent'
+                            fillColor='#FF0000'
+                            strokeColor='#FF0000'
                             center={{
                                 lat: this.props.mapData.lat,
                                 lng: this.props.mapData.lng
@@ -238,7 +238,7 @@ class FindOnMap extends Component {
                     </div>
                 </div>
 
-                <div className="popup dialogResult hide" id="result_popup" role="dialog">
+                <div className={ this.props.mapData.won || this.props.mapData.clicked >= 3 ? 'popup dialogResult hide' : 'popup dialogResult' } id="result_popup" role="dialog">
                     <div className="popupOverlay"></div>
                     <div className="popupContent">
                         <a className="close" title="close">&times;</a>
@@ -247,7 +247,7 @@ class FindOnMap extends Component {
                                 <div className="won"><h3>Awesome! You won!!</h3><p>You are seems a familier person to this place. <a href="#">Explore more</a> about this place</p></div>
                             : ((this.props.mapData.won) ?
                                 <div className="lost"><h3>Sorry! You lost!!</h3><p>Seems you need more information to this place. <a href="#">Explore more</a> about this place</p></div>
-                            : <p>'You have ' + this.props.mapData.clicked + 'chance to play'</p>)}
+                            : <p>'You have won the Challenge'</p>)}
                         </main>
                         <div className="actions">
                             <a role="button" className="btnGlobe" onClick={this.goToGlobe.bind(this)}><i></i> <span>Goto Globe</span></a>

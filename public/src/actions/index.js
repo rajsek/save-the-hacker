@@ -94,7 +94,7 @@ export const LoadQuestion = (id) => {
                 console.log(JSON.parse(JSON.stringify(eval('(' + val.Data + ')'))));
                 dispatch({
                     type: LOADQUESTION,
-                    question: val.title,
+                    question: val.Title,
                     lat: parseFloat(latlng.lat),
                     lng: parseFloat(latlng.lng),
                     start: {
